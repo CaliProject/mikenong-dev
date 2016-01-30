@@ -137,19 +137,52 @@ li {
   margin: 5px 0;
 }
 
-#editor {
-  max-height: 350px;
-  height: 350px;
-  background-color: white;
-  border-collapse: separate;
-  border: 1px solid rgb(204, 204, 204);
-  padding: 4px;
-  box-sizing: content-box;
-  -webkit-box-shadow: rgba(0, 0, 0, 0.0745098) 0px 1px 1px 0px inset;
-  box-shadow: rgba(0, 0, 0, 0.0745098) 0px 1px 1px 0px inset;
-  @include br();
-  overflow: scroll;
-  outline: none;
+.home-list {
+  padding-left: 0;
+
+  li {
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 10px;
+  }
+  span {
+    color: #666;
+    margin-right: 10px;
+  }
+  .time {
+    float: right;
+    margin-right: 0;
+  }
+}
+
+.home-pagination {
+  text-align: center;
+  .pagination {
+    margin-top: 0;
+  }
+}
+
+.home-cooperation {
+  padding-left: 0;
+
+  li {
+    position: relative;
+    padding-left: 80px;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px dotted #eee;
+
+    &:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+  }
+  .time {
+    position: absolute;
+    width: 60px;
+    top: 0;
+    left: 0;
+  }
 }
 
 // Footer

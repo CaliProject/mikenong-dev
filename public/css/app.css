@@ -5862,22 +5862,40 @@ li {
   padding: 5px;
   margin: 5px 0; }
 
-#editor {
-  max-height: 350px;
-  height: 350px;
-  background-color: white;
-  border-collapse: separate;
-  border: 1px solid #cccccc;
-  padding: 4px;
-  box-sizing: content-box;
-  box-shadow: rgba(0, 0, 0, 0.0745098) 0px 1px 1px 0px inset;
-  border-radius: 8px;
-  -webkit-border-radius: 8px;
-  -moz-border-radius: 8px;
-  -ms-border-radius: 8px;
-  -o-border-radius: 8px;
-  overflow: scroll;
-  outline: none; }
+.home-list {
+  padding-left: 0; }
+  .home-list li {
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 10px; }
+  .home-list span {
+    color: #666;
+    margin-right: 10px; }
+  .home-list .time {
+    float: right;
+    margin-right: 0; }
+
+.home-pagination {
+  text-align: center; }
+  .home-pagination .pagination {
+    margin-top: 0; }
+
+.home-cooperation {
+  padding-left: 0; }
+  .home-cooperation li {
+    position: relative;
+    padding-left: 80px;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px dotted #eee; }
+    .home-cooperation li:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none; }
+  .home-cooperation .time {
+    position: absolute;
+    width: 60px;
+    top: 0;
+    left: 0; }
 
 .footer {
   margin: 20px 0 0 0;
