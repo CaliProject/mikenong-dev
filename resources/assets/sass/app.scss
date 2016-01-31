@@ -1,7 +1,4 @@
-@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
-
-@import "mixins";
-@import "variables";
+@import "base";
 
 body {
   font-family: "Microsoft Yahei", "微软雅黑", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -9,7 +6,7 @@ body {
 
 a {
   &:hover {
-    color: $primary-highlight-color;
+    color: $primary-link-hover-color;
 
   }
 }

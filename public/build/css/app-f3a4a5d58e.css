@@ -5753,7 +5753,21 @@ body {
   font-family: "Microsoft Yahei", "微软雅黑", "Helvetica Neue", Helvetica, Arial, sans-serif; }
 
 a:hover {
-  color: #7CFB48; }
+  color: #4cae4c; }
+
+.navbar {
+  height: 70px;
+  z-index: 999; }
+  .navbar a:hover {
+    color: #41BB0F !important; }
+  .navbar .container {
+    margin-top: 10px; }
+
+body {
+  font-family: "Microsoft Yahei", "微软雅黑", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+
+a:hover {
+  color: #4cae4c; }
 
 .navbar {
   height: 70px;

@@ -35,5 +35,13 @@ Route::group(['middleware' => 'web'], function () {
 
 // Routes that needed authenticated logged in users only
 Route::group(['middleware' => ['web','auth'] ], function () {
+    Route::get('/profile', 'ProfileController@index');
     Route::get('/products/create', 'ProductsController@create');
+});
+
+Route::group(['middleware' => ['web', 'auth', 'role:administrator']], function () {
+    Route::get('manage','ManageController@index');
+    Route::get('manage/products', 'ManageController@showProducts');
+    Route::get('manage/categories', 'ManageController@showCategories');
+    Route::get('manage/users', 'ManageController@showUsers');
 });

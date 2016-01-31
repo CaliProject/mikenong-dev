@@ -23,4 +23,25 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * Detect if the user has a given role
+     *
+     * @param $role
+     * @return bool
+     */
+    public function hasRole($role)
+    {
+        return $this->role == $role;
+    }
+
+    /**
+     * If the user is a manager
+     *
+     * @return bool
+     */
+    public function isManager()
+    {
+        return $this->role == "administrator";
+    }
 }
