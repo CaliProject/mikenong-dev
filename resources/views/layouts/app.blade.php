@@ -30,7 +30,7 @@
     @include('layouts.partials.app_footer')
 
     <!-- JavaScripts -->
-    <script src="{{ elixir('js/all.js') }}"></script>
+    <script src="{{ elixir('js/app.js') }}"></script>
 
     @yield('footer-script')
     <script src="//cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>

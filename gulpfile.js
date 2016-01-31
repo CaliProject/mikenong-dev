@@ -13,16 +13,23 @@ var elixir = require('laravel-elixir');
  */
 
 elixir(function(mix) {
-    mix.sass('app.scss');
+    mix.sass('app.scss')
+        .sass('manage.scss');
 
     mix.scripts([
         'jquery.min.js',
         'jquery.banner.js',
         'freshereditor.js'
-    ]);
+    ], 'public/js/app.js');
+
+    mix.scripts([
+        'jquery.min.js',
+    ], 'public/js/manage.js');
 
     mix.version([
         'css/app.css',
-        'js/all.js'
+        'css/manage.css',
+        'js/app.js',
+        'js/manage.js'
     ]);
 });

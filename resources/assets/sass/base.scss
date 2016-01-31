@@ -1,0 +1,28 @@
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+
+@import "mixins";
+@import "variables";
+
+body {
+  font-family: "Microsoft Yahei", "微软雅黑", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+a {
+  &:hover {
+    color: $primary-link-hover-color;
+  }
+}
+
+.navbar {
+  height: 70px;
+  z-index: 999;
+  a {
+    &:hover {
+      color: $primary-hover-color !important;
+    }
+  }
+
+  .container {
+    margin-top: 10px;
+  }
+}

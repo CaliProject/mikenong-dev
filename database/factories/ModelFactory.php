@@ -28,3 +28,29 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'remember_token' => str_random(10),
     ];
 });
+
+//$factory->define(App\Category::class, function (Faker\Generator $faker) {
+//    return [
+//        'name' => $faker->name,
+//        'parent_id' => $faker->randomKey()
+//    ];
+//});
+
+$factory->define(App\Product::class, function (Faker\Generator $faker) {
+    return [
+        'title' => $faker->sentence(5),
+        'user_id' => $faker->numberBetween(201, 301),
+        'contact_name' => $faker->name,
+        'phone' => $faker->phoneNumber,
+        'cellphone' => $faker->phoneNumber,
+        'email' => $faker->companyEmail,
+        'release_date' => $faker->date('Y-m'),
+        'address' => $faker->address,
+        'category_id' => $faker->numberBetween(1, 10),
+        'pricing' => $faker->numberBetween(1,5),
+        'description' => $faker->realText(),
+        'status' => $faker->randomElement(['provide', 'demand']),
+        'is_essential' => $faker->randomKey([0, 1]),
+        'is_sticky' => $faker->randomKey([0, 1]),
+    ];
+});
