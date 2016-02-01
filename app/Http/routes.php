@@ -43,5 +43,7 @@ Route::group(['middleware' => ['web', 'auth', 'role:administrator']], function (
     Route::get('manage','ManageController@index');
     Route::get('manage/products', 'ManageController@showProducts');
     Route::get('manage/categories', 'ManageController@showCategories');
+    Route::get('manage/category/add', 'ManageController@addCategory');
+    Route::post('manage/category/add', 'ManageController@saveNewCategory');
     Route::get('manage/users', 'ManageController@showUsers');
 });

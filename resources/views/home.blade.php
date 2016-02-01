@@ -11,10 +11,12 @@
                         <li class="active"><a href=""><img src="images/banner1.jpg" alt=""></a></li>
                         <li><a href=""><img src="images/banner2.jpg" alt=""></a></li>
                         <li><a href=""><img src="images/banner3.jpg" alt=""></a></li>
+                        <li><a href=""><img src="images/banner4.jpg" alt=""></a></li>
                     </ul>
                     <div class="banner-dots">
                         <div class="banner-nav">
                             <a class="trigger current" href="javascript:;"></a>
+                            <a class="trigger" href="javascript:;"></a>
                             <a class="trigger" href="javascript:;"></a>
                             <a class="trigger" href="javascript:;"></a>
                         </div>
