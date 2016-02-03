@@ -23,6 +23,39 @@ class Category extends Model
     }
 
     /**
+     * Detect if the current category has any sub category
+     *
+     * @return bool
+     */
+    public function hasSubCategories()
+    {
+        $categories = Category::where('parent_id', '=', $this->id)->get();
+
+        return count($categories) ? true : false;
+    }
+
+    /**
+     * Scope a query with its sub categories
+     *
+     * @param $query
+     * @return mixed
+     */
+    public function scopeSubCategories($query)
+    {
+        return $query->where('parent_id', '=', $this->id);
+    }
+
+    /**
+     * Get the sub categories of current category
+     *
+     * @return mixed
+     */
+    public function getSubCategories()
+    {
+        return $this->subCategories()->get();
+    }
+
+    /**
      * Get the current category parent's name
      *
      * @return Category

@@ -52,6 +52,10 @@
     margin: 10px;
     padding: 5px;
 
+    form.search-form {
+      display: inline;
+    }
+
     form#category-form {
       padding: 10px;
       margin: 10px 0;
@@ -63,8 +67,47 @@
   }
 }
 
+.search-bar {
+  border: solid 1px rgba(0, 0, 0, 0.1);
+  margin: 10px 5px;
+  @include br(12px);
+  padding: 5px 10px;
+  padding-right: 22px;
+  width: 200px;
+  outline: none;
+  @include ts();
+
+  &:focus {
+    @include boxshadow(3px 3px 30px 2px rgba(0, 0, 0, 0.1));
+    border: solid 1px rgba(10, 10, 10, 0.25);
+    + i.fa-search {
+      color: rgba(0, 0, 0, 0.5);
+    }
+  }
+}
+
+i.fa-search {
+  position: relative;
+  left: -30px;
+  color: rgba(0,0,0,0.15);
+  @include ts();
+}
+
 #flash-message {
   padding: 10px;
   border-radius: 8px;
   font-weight: 800;
+}
+
+.separator {
+  display: block;
+  &:after {
+    content: '';
+    width: 100%;
+    border: 1px dashed rgba(0,0,0,0.15);
+    display: block;
+    position: relative;
+    left: 0;
+    top: 0;
+  }
 }
