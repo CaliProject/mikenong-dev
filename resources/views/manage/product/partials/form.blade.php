@@ -65,7 +65,13 @@
             所属分类
         </label>
         <div class="col-lg-8">
-
+            <select name="category_id" id="" class="form-control">
+                @forelse(\App\Category::superCategories()->get() as $category)
+                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                @empty
+                    <option value="0">无</option>
+                @endforelse
+            </select>
         </div>
     </div>
     <div class="form-group">
