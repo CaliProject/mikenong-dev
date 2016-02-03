@@ -35,6 +35,16 @@ class Category extends Model
     }
 
     /**
+     * Get all sub categories
+     *
+     * @return mixed
+     */
+    public static function allSubCategories()
+    {
+        return static::where('parent_id', '!=', 0)->get();
+    }
+
+    /**
      * Scope a query with its sub categories
      *
      * @param $query

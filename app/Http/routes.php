@@ -31,6 +31,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::auth();
 
     Route::get('/home', 'HomeController@index');
+    Route::get('/product/{product}', 'ProductsController@productDetails');
 });
 
 // Routes that needed authenticated logged in users only
@@ -54,7 +55,7 @@ Route::group(['middleware' => ['web', 'auth', 'role:administrator']], function (
     Route::get('manage/product/{product}', 'ManageController@editProduct');
     Route::post('manage/product/{product}', 'ManageController@updateProduct');
     // Delete related
-    Route::delete('manage/user/{product}', 'ManageController@deleteProduct');
+    Route::delete('manage/product/{product}', 'ManageController@deleteProduct');
 
     /**
      * Categories manage route

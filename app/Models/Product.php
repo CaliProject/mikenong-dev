@@ -9,7 +9,8 @@ class Product extends Model
     //
     protected $fillable = [
         'title', 'enterprise_id','contact_name','phone','cellphone','email',
-        'release_date','address','category_id','pricing','description','status'
+        'release_date','address','category_id','pricing','description','status',
+        'is_sticky', 'is_essential'
     ];
 
     /**
@@ -30,5 +31,33 @@ class Product extends Model
     public function user()
     {
         return $this->belongsTo('App\User');
+    }
+
+    /**
+     * Relationship to the belonged category
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function category()
+    {
+        return $this->belongsTo('App\Category');
+    }
+
+    /**
+     * Format the status into a readable string
+     *
+     * @return string
+     */
+    public function readableStatus()
+    {
+        switch ($this->status) {
+            case "provide":
+                $status = "供";
+                break;
+            default:
+                $status = "求";
+                break;
+        }
+        return $status;
     }
 }

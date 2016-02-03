@@ -9,7 +9,7 @@
         <div class="manage-actions">
             @include('manage.category.partials.form', [
              'method' => 'POST',
-             'action_url' => url('/manage/categories/add'),
+             'action_url' => url('/manage/category/add'),
              'action_button' => '新建',
              'category' => new \App\Category])
         </div>

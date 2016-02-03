@@ -28,23 +28,25 @@
             <table class="table table-striped table-hover">
                 <thead>
                 <tr>
+                    <td>供求类型</td>
                     <td>产品名</td>
                     <td>发布用户</td>
                     <td>发布时间</td>
-                    <td>产品类型</td>
+                    <td>所属类别</td>
                     <td>操作</td>
                 </tr>
                 </thead>
                 <tbody>
                 @forelse($products as $product)
                     <tr>
+                        <td>{{ $product->readableStatus() }}</td>
                         <td>{{ $product->title }}</td>
                         <td>{{ $product->user->name }}</td>
                         <td>{{ $product->created_at->format('Y年m月d日') }}</td>
-                        <td>{{ $product->status }}</td>
+                        <td>{{ $product->category ? $product->category->name : "无" }}</td>
                         <td>
                             <a href="{{ action('ManageController@editProduct', ['id' => $product->id]) }}" class="btn btn-success btn-sm">编辑</a>
-                            <a data-id="{{ $product->id }}" href="javascript:;" onclick="deleteUser($(this))" class="btn btn-danger btn-sm">删除</a>
+                            <a data-id="{{ $product->id }}" href="javascript:;" onclick="deleteProduct($(this))" class="btn btn-danger btn-sm">删除</a>
                         </td>
                     </tr>
                 @empty
@@ -65,4 +67,26 @@
             @endif
         </div>
     </div>
+@stop
+
+@section('footer-script')
+    <script>
+        function deleteProduct(el) {
+            if (confirm("确定要删除该用户吗?")) {
+                $.ajax({
+                    url: "{{ url('/manage/product/') }}/" + el.attr('data-id'),
+                    type: "DELETE",
+                    data: {_token: "{{ csrf_token() }}"},
+                    dataType: "json",
+                    success: function(json) {
+                        if (json.status == "success") {
+                            window.location.href = "{{ url()->current() }}";
+                        } else {
+                            alert('删除用户失败,请重试');
+                        }
+                    }
+                });
+            }
+        }
+    </script>
 @stop

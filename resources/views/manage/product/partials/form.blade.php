@@ -2,24 +2,25 @@
     {!! csrf_field() !!}
     <div class="form-group">
         <label for="" class="col-lg-2">
+            *类型
+        </label>
+        <div class="col-lg-8">
+            <div class="radio-inline">
+                <input type="radio" name="status" value="provide"{{ old('status') == "provide" ? " checked" : $product->status == "provide" ? " checked" : "" }}>供
+            </div>
+            <div class="radio-inline">
+                <input type="radio" name="status" value="demand"{{ old('status') == "demand" ? " checked" : $product->status == "demand" ? " checked" : "" }}>求
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="" class="col-lg-2">
             *标题
         </label>
         <div class="col-lg-8">
-            <input type="text" class="form-control" name="name" value="{{ old('title') ? old('title') : $product->title }}" required>
+            <input type="text" class="form-control" name="title" value="{{ old('title') ? old('title') : $product->title }}" required>
         </div>
     </div>
-    @if(isset($product->user))
-    <div class="form-group">
-        <label for="" class="col-lg-2">
-            发布用户
-        </label>
-        <div class="col-lg-8">
-            <p class="form-control-static">
-                {{ $product->user->name }}
-            </p>
-        </div>
-    </div>
-    @endif
     <div class="form-group">
         <label for="" class="col-lg-2">
             *联系姓名
@@ -38,10 +39,18 @@
     </div>
     <div class="form-group">
         <label for="" class="col-lg-2">
+            *联系邮箱
+        </label>
+        <div class="col-lg-8">
+            <input type="email" class="form-control" name="email" value="{{ old('email') ? old('email') : $product->email }}" required>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="" class="col-lg-2">
             手机号码
         </label>
         <div class="col-lg-8">
-            <input type="tel" class="form-control" name="cellphone" value="{{ old('cellphone') ? old('cellphone') : $product->cellphone }}" required>
+            <input type="tel" class="form-control" name="cellphone" value="{{ old('cellphone') ? old('cellphone') : $product->cellphone }}">
         </div>
     </div>
     <div class="form-group">
@@ -66,10 +75,10 @@
         </label>
         <div class="col-lg-8">
             <select name="category_id" id="" class="form-control">
-                @forelse(\App\Category::superCategories()->get() as $category)
-                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                <option value="0">无</option>
+                @forelse(\App\Category::allSubCategories() as $category)
+                    <option value="{{ $category->id }}"{{ $product->category ? $product->category->id == $category->id ? " selected" : "" : "" }}>{{ $category->name }}</option>
                 @empty
-                    <option value="0">无</option>
                 @endforelse
             </select>
         </div>
@@ -96,10 +105,10 @@
         </label>
         <div class="col-lg-8">
             <div class="radio-inline">
-                <input type="radio" value="1" name="is_sticky">是
+                <input type="radio" value="1" name="is_sticky"{{ $product->is_sticky == 1 ? " checked" : "" }}>是
             </div>
             <div class="radio-inline">
-                <input type="radio" value="0" name="is_sticky">否
+                <input type="radio" value="0" name="is_sticky"{{ $product->is_sticky == 0 ? " checked" : "" }}>否
             </div>
         </div>
     </div>
@@ -109,10 +118,10 @@
         </label>
         <div class="col-lg-8">
             <div class="radio-inline">
-                <input type="radio" value="1" name="is_essential">是
+                <input type="radio" value="1" name="is_essential"{{ $product->is_essential == 1 ? " checked" : "" }}>是
             </div>
             <div class="radio-inline">
-                <input type="radio" value="0" name="is_essential">否
+                <input type="radio" value="0" name="is_essential"{{ $product->is_essential == 0 ? " checked" : "" }}>否
             </div>
         </div>
     </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Http\Requests\CreateProductRequest;
 use App\Product;
 use App\User;
 use Illuminate\Http\Request;
@@ -19,9 +20,7 @@ class ManageController extends Controller
      */
     public function index()
     {
-        $title = "管理首页";
-
-        return view('manage.index', compact('title'));
+        return view('manage.index');
     }
 
     /**
@@ -46,9 +45,75 @@ class ManageController extends Controller
         return view('manage.product.add');
     }
 
-    public function saveNewProduct(Request $request)
+    /**
+     * Save a new product from a POST request
+     *
+     * @param CreateProductRequest $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function saveNewProduct(CreateProductRequest $request)
     {
+        $product = Product::create($request->except('_token', 'editorValue'));
+        $product->description = $request->input("editorValue");
+        $product->user_id = $request->user()->id;
 
+        return $product->save() ? redirect('/manage/products')->with([
+            'status' => 'success',
+            'message' => '产品创建成功'
+        ]) : redirect()->back()->with([
+            'status' => 'error',
+            'message' => '产品创建失败, 请重试'
+        ]);
+    }
+
+    /**
+     * Display view for editing a given product
+     *
+     * @param Product $product
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function editProduct(Product $product)
+    {
+        return view('manage.product.edit', compact('product'));
+    }
+
+    /**
+     * Update a product with a POST request
+     *
+     * @param CreateProductRequest $request
+     * @param Product $product
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function updateProduct(CreateProductRequest $request, Product $product)
+    {
+        $product->update($request->except(['_token','editorValue']));
+        $product->description = $request->input("editorValue");
+
+        return $product->save() ? redirect()->back()->with([
+            'status' => 'success',
+            'message' => '产品更新成功'
+        ]) : redirect()->back()->with([
+            'status' => 'error',
+            'message' => '产品更新失败, 请重试'
+        ]);
+    }
+
+    /**
+     * Delete a product
+     *
+     * @param Product $product
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
+     */
+    public function deleteProduct(Product $product)
+    {
+        return $product->delete() ? [
+            'status' => 'success',
+            'message' => '成功删除产品'
+        ] : [
+            'status' => 'error',
+            'message' => '删除失败, 请重试'
+        ];
     }
 
     /**
@@ -64,6 +129,41 @@ class ManageController extends Controller
     }
 
     /**
+     * Display the page for adding a category
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function addCategory()
+    {
+        $categories = Category::superCategories()->get();
+
+        return view('manage.category.add', compact('categories'));
+    }
+
+    /**
+     * Save a new category with POST request
+     *
+     * @param Request $request
+     * @return $this|\Illuminate\Http\RedirectResponse
+     */
+    public function saveNewCategory(Request $request)
+    {
+        if (trim($request->input('name')) == "") {
+            return redirect()
+                ->back()
+                ->with(['status' => 'error', 'message' => '请填写分类名称'])
+                ->withInput($request->except('_token'));
+        }
+
+        $category = Category::create($request->except('_token'));
+
+        return $category ? redirect('/manage/categories')->with(['status' => 'success', 'message' => '分类创建成功!']) : redirect()
+            ->back()
+            ->with(['status' => 'error', 'message' => '创建失败, 请重试'])
+            ->withInput($request->except('_token'));
+    }
+
+    /**
      * Display the edit page by the given category
      *
      * @param Category $category
@@ -74,7 +174,6 @@ class ManageController extends Controller
         $categories = Category::superCategories()->get();
         return view('manage.category.edit', compact('category', 'categories'));
     }
-
 
     /**
      * Update a category
@@ -218,40 +317,5 @@ class ManageController extends Controller
         $users = User::search($keyword);
 
         return view('manage.user.index', compact('users', 'keyword'));
-    }
-
-    /**
-     * Display the page for adding a category
-     *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function addCategory()
-    {
-        $categories = Category::superCategories()->get();
-
-        return view('manage.category.add', compact('categories'));
-    }
-
-    /**
-     * Save a new category with POST request
-     *
-     * @param Request $request
-     * @return $this|\Illuminate\Http\RedirectResponse
-     */
-    public function saveNewCategory(Request $request)
-    {
-        if (trim($request->input('name')) == "") {
-            return redirect()
-                ->back()
-                ->with(['status' => 'error', 'message' => '请填写分类名称'])
-                ->withInput($request->except('_token'));
-        }
-
-        $category = Category::create($request->except('_token'));
-
-        return $category ? redirect('/manage/categories')->with(['status' => 'success', 'message' => '分类创建成功!']) : redirect()
-            ->back()
-            ->with(['status' => 'error', 'message' => '创建失败, 请重试'])
-            ->withInput($request->except('_token'));
     }
 }
