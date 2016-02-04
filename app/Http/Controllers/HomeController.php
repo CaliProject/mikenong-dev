@@ -25,7 +25,9 @@ class HomeController extends Controller
     {
         $title = "主页";
 
-        return view('home', compact('title'));
+        $latest_products = Product::latest();
+
+        return view('home', compact('title', 'latest_products'));
     }
 
 }

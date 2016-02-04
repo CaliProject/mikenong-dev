@@ -5960,9 +5960,8 @@ li {
 
 .details-panel .more {
   text-align: right; }
-
-.details-panel .more:after {
-  content: ' >>'; }
+  .details-panel .more:after {
+    content: ' >>'; }
 
 .footer {
   margin: 20px 0 0 0;

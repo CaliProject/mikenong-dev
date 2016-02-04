@@ -5,7 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>{{ $title or '' }} - 米科农网</title>
+    <title>{{ $title or '' }} - {{ \App\SiteConfiguration::getSiteName() }}</title>
+
+    <meta name="description" content="{{ \App\SiteConfiguration::getSiteDescription() }}">
+    <meta name="keywords" content="{{ \App\SiteConfiguration::getSiteKeywords() }}">
 
     <!-- Fonts -->
     <link href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">

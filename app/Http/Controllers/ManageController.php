@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Category;
 use App\Http\Requests\CreateProductRequest;
 use App\Product;
+use App\SiteConfiguration;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -20,7 +21,11 @@ class ManageController extends Controller
      */
     public function index()
     {
-        return view('manage.index');
+        $productsCount = Product::all()->count();
+        $categoriesCount = Category::all()->count();
+        $usersCount = User::all()->count();
+
+        return view('manage.index', compact('productsCount', 'categoriesCount', 'usersCount'));
     }
 
     /**
@@ -317,5 +322,30 @@ class ManageController extends Controller
         $users = User::search($keyword);
 
         return view('manage.user.index', compact('users', 'keyword'));
+    }
+
+    /**
+     * Display site configurations page
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function showSiteConfigs()
+    {
+        return view('manage.site.index');
+    }
+
+    /**
+     * Save configurations with POST request
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function saveSiteConfigs(Request $request)
+    {
+        SiteConfiguration::saveValues($request);
+        return redirect()->back()->with([
+            'status' => 'success',
+            'message' => '站点信息更新成功'
+        ]);
     }
 }

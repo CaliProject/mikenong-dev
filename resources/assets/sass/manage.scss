@@ -56,7 +56,7 @@
       display: inline;
     }
 
-    form#category-form {
+    form#form {
       padding: 10px;
       margin: 10px 0;
 
@@ -109,5 +109,18 @@ i.fa-search {
     position: relative;
     left: 0;
     top: 0;
+  }
+}
+
+.manage-index  {
+  text-align: center;
+
+  div {
+    margin: 15px 10px;
+    border: 1px dashed rgba(0,0,0,0.25);
+    h3 {
+      font-size: 18px;
+      font-weight: 800;
+    }
   }
 }

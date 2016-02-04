@@ -30,14 +30,14 @@ Route::group(['middleware' => ['web']], function () {
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
 
-    Route::get('/home', 'HomeController@index');
-    Route::get('/product/{product}', 'ProductsController@productDetails');
+    Route::get('home', 'HomeController@index');
+    Route::get('product/{product}', 'ProductsController@productDetails');
 });
 
 // Routes that needed authenticated logged in users only
 Route::group(['middleware' => ['web','auth'] ], function () {
-    Route::get('/profile', 'ProfileController@index');
-    Route::get('/products/create', 'ProductsController@create');
+    Route::get('profile', 'ProfileController@index');
+    Route::get('products/create', 'ProductsController@create');
 });
 
 // Manage routes
@@ -82,4 +82,10 @@ Route::group(['middleware' => ['web', 'auth', 'role:administrator']], function (
     Route::post('manage/user/{user}', 'ManageController@updateUser');
     // Delete related
     Route::delete('manage/user/{user}', 'ManageController@deleteUser');
+
+    /*
+     * Site configurations related
+     */
+    Route::get('manage/site', 'ManageController@showSiteConfigs');
+    Route::post('manage/site', 'ManageController@saveSiteConfigs');
 });

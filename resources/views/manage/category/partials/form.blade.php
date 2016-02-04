@@ -1,11 +1,11 @@
-<form action="{{ $action_url }}" method="{{ $method }}" class="form-horizontal col-lg-8" id="category-form">
+<form action="{{ $action_url }}" method="{{ $method }}" class="form-horizontal col-lg-8" id="form">
     {!! csrf_field() !!}
     <div class="form-group">
         <label for="" class="col-lg-2">
             分类名称
         </label>
         <div class="col-lg-8">
-            <input type="text" class="form-control" name="name" value="{{ old('name') or $category->name }}">
+            <input type="text" class="form-control" name="name" value="{{ old('name') ? old('name') : $category->name }}">
         </div>
     </div>
     <div class="form-group">

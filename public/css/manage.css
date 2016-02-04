@@ -5806,10 +5806,10 @@ a:hover {
     padding: 5px; }
     #manage-content .manage-actions form.search-form {
       display: inline; }
-    #manage-content .manage-actions form#category-form {
+    #manage-content .manage-actions form#form {
       padding: 10px;
       margin: 10px 0; }
-      #manage-content .manage-actions form#category-form label {
+      #manage-content .manage-actions form#form label {
         line-height: 34px; }
 
 .search-bar {
@@ -5860,5 +5860,14 @@ i.fa-search {
     position: relative;
     left: 0;
     top: 0; }
+
+.manage-index {
+  text-align: center; }
+  .manage-index div {
+    margin: 15px 10px;
+    border: 1px dashed rgba(0, 0, 0, 0.25); }
+    .manage-index div h3 {
+      font-size: 18px;
+      font-weight: 800; }
 
 /*# sourceMappingURL=manage.css.map */

@@ -27,28 +27,19 @@
                     <div class="panel-heading">
                         产品信息
                     </div>
-
                     <div class="panel-body">
                         <ul class="home-list">
+                            @forelse($latest_products as $product)
+                                <li class="{{ $product->is_sticky ? 'sticky' : '' }}{{ $product->is_essential ? ' essential' : '' }}">
+                                    <p>
+                                        <span>[{{ $product->readableStatus() }}]</span>
+                                        <a href="">{{ $product->title }}</a>
+                                        <span class="time">{{ $product->created_at->format('Y-m-d') }}</span>
+                                    </p>
+                                </li>
+                            @empty
+                            @endforelse
                             <li><p><span>[供]</span>信息信息信息信息<span class="time">2016-01-31</span></p></li>
-                            <li><p>信息</p></li>
-                            <li><p>信息</p></li>
-                            <li><p>信息</p></li>
-                            <li><p>信息</p></li>
-                            <li><p>信息</p></li>
-                            <li><p>信息</p></li>
-                            <li><p>信息</p></li>
-                            <li><p>信息</p></li>
-                            <li><p>信息</p></li>
-                            <li><p>信息</p></li>
-                            <li><p>信息</p></li>
-                            <li><p>信息</p></li>
-                            <li><p>信息</p></li>
-                            <li><p>信息</p></li>
-                            <li><p>信息</p></li>
-                            <li><p>信息</p></li>
-                            <li><p>信息</p></li>
-                            <li><p>信息</p></li>
                         </ul>
                     </div>
 					<nav class="home-pagination">

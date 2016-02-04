@@ -12,18 +12,19 @@
 
             <!-- Branding Image -->
             <a class="navbar-brand" href="{{ url('/') }}">
-                米科农网
+                {{ \App\SiteConfiguration::getSiteName() }}
             </a>
         </div>
 
         <div class="collapse navbar-collapse" id="app-navbar-collapse">
             <!-- Left Side Of Navbar -->
             <ul class="nav navbar-nav">
-                <li><a href="{{ url('/home') }}">菜单1</a></li>
-                <li><a href="{{ url('/home') }}">菜单2</a></li>
-                <li><a href="{{ url('/home') }}">菜单3</a></li>
-                <li><a href="{{ url('/home') }}">菜单4</a></li>
-                <li><a href="{{ url('/home') }}">菜单5</a></li>
+                @for($i = 1; $i <= 5; $i++)
+                    <li>
+                        <a target="_blank" href="{{ mb_substr(\App\SiteConfiguration::getSiteNavLink($i), mb_strpos(\App\SiteConfiguration::getSiteNavLink($i), "|") + 1) }}">
+                            {{ mb_substr(\App\SiteConfiguration::getSiteNavLink($i), 0, mb_strpos(\App\SiteConfiguration::getSiteNavLink($i), "|")) }}</a>
+                    </li>
+                @endfor
             </ul>
 
             <!-- Right Side Of Navbar -->

@@ -23,6 +23,11 @@ class Product extends Model
         return Product::orderBy('title')->paginate(50);
     }
 
+    public static function scopeLatest($query)
+    {
+        return $query->orderBy('is_sticky', 'desc')->paginate(30);
+    }
+
     /**
      * Relationship to the belonged user
      *

@@ -4,5 +4,6 @@
         <li{{ url()->current() == url('/manage/products') ? ' class=active' : '' }}><a href="{{ url('/manage/products') }}">产品管理</a></li>
         <li{{ url()->current() == url('/manage/categories') ? ' class=active' : '' }}><a href="{{ url('/manage/categories') }}">分类管理</a></li>
         <li{{ url()->current() == url('/manage/users') ? ' class=active' : '' }}><a href="{{ url('/manage/users') }}">用户管理</a></li>
+        <li{{ url()->current() == url('/manage/site') ? ' class=active' : '' }}><a href="{{ url('/manage/site') }}">站点管理</a></li>
     </ul>
 </section>

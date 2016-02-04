@@ -1,4 +1,4 @@
-<form action="{{ $action_url }}" method="{{ $method }}" class="form-horizontal col-lg-10" id="category-form">
+<form action="{{ $action_url }}" method="{{ $method }}" class="form-horizontal col-lg-10" id="form">
     {!! csrf_field() !!}
     <div class="form-group">
         <label for="" class="col-lg-2">
