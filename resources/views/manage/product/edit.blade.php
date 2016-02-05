@@ -13,10 +13,12 @@
         @include('manage.flash-message')
         <h2>编辑产品</h2>
         <div class="manage-actions">
+            <div class="col-lg-10">
             @include('manage.product.partials.form', [
              'method' => 'POST',
              'action_url' => action('ManageController@updateProduct', ["id" => $product->id]),
              'action_button' => '更新'])
+            </div>
         </div>
     </div>
 @stop

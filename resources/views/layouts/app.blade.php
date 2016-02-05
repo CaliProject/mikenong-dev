@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>{{ $title or '' }} - {{ \App\SiteConfiguration::getSiteName() }}</title>
+    <title>@yield('title') - {{ \App\SiteConfiguration::getSiteName() }}</title>
 
     <meta name="description" content="{{ \App\SiteConfiguration::getSiteDescription() }}">
     <meta name="keywords" content="{{ \App\SiteConfiguration::getSiteKeywords() }}">

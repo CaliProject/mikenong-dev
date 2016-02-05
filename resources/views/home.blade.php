@@ -1,8 +1,9 @@
 @extends('layouts.app')
 
+@section('title', '首页')
+
 @section('content')
     <div class="container">
-
         <div class="row">
             <div class="col-md-8">
                 {{-- Banner Start --}}
@@ -28,6 +29,7 @@
                         产品信息
                     </div>
                     <div class="panel-body">
+                        {{-- Product List Start --}}
                         <ul class="home-list">
                             @forelse($latest_products as $product)
                                 <li class="{{ $product->is_sticky ? 'sticky' : '' }}{{ $product->is_essential ? ' essential' : '' }}">
@@ -38,29 +40,16 @@
                                     </p>
                                 </li>
                             @empty
+                                <li><p>暂无产品</p></li>
                             @endforelse
-                            <li><p><span>[供]</span>信息信息信息信息<span class="time">2016-01-31</span></p></li>
                         </ul>
+                        {{-- Product List End --}}
                     </div>
-					<nav class="home-pagination">
-					  <ul class="pagination">
-					    <li>
-					      <a href="#" aria-label="Previous">
-					        <span aria-hidden="true">&laquo;</span>
-					      </a>
-					    </li>
-					    <li><a href="#">1</a></li>
-					    <li><a href="#">2</a></li>
-					    <li><a href="#">3</a></li>
-					    <li><a href="#">4</a></li>
-					    <li><a href="#">5</a></li>
-					    <li>
-					      <a href="#" aria-label="Next">
-					        <span aria-hidden="true">&raquo;</span>
-					      </a>
-					    </li>
-					  </ul>
-					</nav>
+					{{-- Pagination Start--}}
+                    <nav class="home-pagination">
+                        {!! $latest_products->links() !!}
+                    </nav>
+                    {{-- Pagination End --}}
                 </div>
 
             </div>

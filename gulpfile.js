@@ -19,7 +19,7 @@ elixir(function(mix) {
     mix.scripts([
         'jquery.min.js',
         'jquery.banner.js',
-        'freshereditor.js'
+        'dropzone.js'
     ], 'public/js/app.js');
 
     mix.scripts([

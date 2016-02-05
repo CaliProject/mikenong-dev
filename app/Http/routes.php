@@ -38,6 +38,13 @@ Route::group(['middleware' => 'web'], function () {
 Route::group(['middleware' => ['web','auth'] ], function () {
     Route::get('profile', 'ProfileController@index');
     Route::get('products/create', 'ProductsController@create');
+    Route::get('products/upload-dropzone', function () {
+        return view('products.partials.upload');
+    });
+    Route::get('products/upload', function () {
+        return ['status' => 'success'];
+    });
+    Route::post('products/upload', 'ProductsController@upload');
 });
 
 // Manage routes

@@ -25,7 +25,7 @@ class Product extends Model
 
     public static function scopeLatest($query)
     {
-        return $query->orderBy('is_sticky', 'desc')->paginate(30);
+        return $query->orderBy('is_sticky', 'desc')->paginate(35);
     }
 
     /**

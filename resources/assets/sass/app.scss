@@ -140,6 +140,42 @@ li {
   li {
     border-bottom: 1px solid #ddd;
     margin-bottom: 10px;
+
+    p {
+      line-height: 25px;
+    }
+
+    &.essential > p {
+      &:before {
+        content: '精品';
+        display: inline-block;
+        position: relative;
+        padding: 0 5px;
+        margin: 0 2px;
+        color: #F9FCF9;
+        background: #b85c3e;
+        font-size: 15px;
+        @include br(3px);
+        top: 1px;
+        left: 0px;
+      }
+    }
+
+    &.sticky > p {
+      &:before {
+        content: '置顶';
+        display: inline-block;
+        position: relative;
+        padding: 0 5px;
+        margin: 0 2px;
+        color: #F9FCF9;
+        background: #5CB85C;
+        font-size: 15px;
+        border-radius: 3px;
+        top: 2px;
+        left: 0px;
+      }
+    }
   }
   span {
     color: #666;
@@ -155,6 +191,11 @@ li {
   text-align: center;
   .pagination {
     margin-top: 0;
+    
+    .active > span {
+      background-color: $primary-link-hover-color;
+      border-color: $primary-link-hover-color;
+    }
   }
 }
 
@@ -250,6 +291,15 @@ li {
     &:after {
       content: ' >>';
     }
+  }
+}
+
+form#form {
+  padding: 10px;
+  margin: 10px 0;
+
+  label {
+    line-height: 34px;
   }
 }
 
