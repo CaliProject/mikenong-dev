@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Artisan;
 
 class ManageController extends Controller
 {
@@ -301,6 +302,35 @@ class ManageController extends Controller
                 ];
         }
     }
+
+    /**
+     * Search products by a query string
+     *
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function searchProducts(Request $request)
+    {
+        $keyword = $request->input('keyword');
+        $products = Product::search($keyword)->paginate(35);
+        $products->setPath('/manage/products/search/'.$keyword);
+
+        return view('manage.product.index', compact('products', 'keyword'));
+    }
+
+    /**
+     * Search products by url
+     *
+     * @param $keyword
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function searchProductsURL($keyword)
+    {
+        $products = Product::search($keyword)->paginate(35);
+
+        return view('manage.product.index', compact('products', 'keyword'));
+    }
+
     /**
      * Search users by a query string
      *
@@ -352,5 +382,25 @@ class ManageController extends Controller
             'status' => 'success',
             'message' => '站点信息更新成功'
         ]);
+    }
+
+    /**
+     * Database migration
+     *
+     * @return mixed
+     */
+    public function migrate()
+    {
+        return Artisan::call('migrate');
+    }
+
+    /**
+     * Database rollback
+     *
+     * @return mixed
+     */
+    public function rollback()
+    {
+        return Artisan::call('migrate:rollback');
     }
 }

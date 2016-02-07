@@ -55,7 +55,7 @@
                             导航菜单{{ $i }}
                         </label>
                         <div class="col-lg-8">
-                            <input type="text" class="form-control" name="link{{$i}}" value="{{ \App\SiteConfiguration::getSiteNavLink($i) }}" placeholder="用'|'分割,比如'名称|http://baidu.com'">
+                            <input type="text" class="form-control" name="link{{$i}}" value="{{ \App\SiteConfiguration::getValueByKey('nav.link.'.$i) }}" placeholder="用'|'分割,比如'名称|http://baidu.com'">
                         </div>
                     </div>
                 @endfor

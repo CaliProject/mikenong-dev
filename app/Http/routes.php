@@ -89,6 +89,9 @@ Route::group(['middleware' => ['web', 'auth', 'role:administrator']], function (
     Route::post('manage/product/{product}', 'ManageController@updateProduct');
     // Delete related
     Route::delete('manage/product/{product}', 'ManageController@deleteProduct');
+    // Search related
+    Route::get('manage/products/search', 'ManageController@searchProducts');
+    Route::get('manage/products/search/{keyword}', 'ManageController@searchProductsURL');
 
     /**
      * Categories manage routes
@@ -121,4 +124,10 @@ Route::group(['middleware' => ['web', 'auth', 'role:administrator']], function (
      */
     Route::get('manage/site', 'ManageController@showSiteConfigs');
     Route::post('manage/site', 'ManageController@saveSiteConfigs');
+
+    /*
+     * Database migration
+     */
+    Route::get('manage/migrate', 'ManageController@migrate');
+    Route::get('manage/migrate/rollback', 'ManageController@rollback');
 });

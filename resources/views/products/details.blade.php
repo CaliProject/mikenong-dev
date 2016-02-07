@@ -32,7 +32,7 @@
 						</div>
 						<div class="details-content">
 							<ul class="info">
-                                <li><span>发布单位</span>{{ $product->user->real_name }}【{{ $product->user->getRole() }}】</li>
+                                <li><span>发布{{ $product->user->role == "cooperative" ? "单位" : "人" }}</span>{{ $product->user->role == "cooperative" ? $product->user->coop_name : $product->user->real_name }}【{{ $product->user->getRole() }}】</li>
                                 @unless($product->contact_name == "")
                                     <li><span>联系人</span>{{ $product->contact_name }}</li>
                                 @endunless
@@ -56,6 +56,9 @@
                                 @endunless
                                 @unless($product->cellphone == "")
                                     <li><span>手机号码</span>{{ $product->cellphone }}</li>
+                                @endunless
+                                @unless($product->user->taobao == "")
+                                    <li><span>淘宝店铺</span><a href="{{ $product->user->taobao }}" target="_blank">{{ $product->user->taobao }}</a></li>
                                 @endunless
                                 <li><span>产品类别</span>{{ $product->category->name }}</li>
                                 @unless($product->pricing == "")
