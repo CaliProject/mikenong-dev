@@ -9,6 +9,13 @@
 @push('scripts.header')
 <script>
     var UPLOAD_IMAGE_URL = "{{ url('/products/upload') }}";
+    window.onbeforeunload = function()
+    {
+        var unloads = document.getElementsByTagName("body")[0].value;
+        if(unloads == null || unloads == ""){
+            return "您确定要退出页面吗？所有改变将不会保存";
+        }
+    }
 </script>
 
 <script type="text/javascript" charset="utf-8" src="{{ url('ueditor') }}/ueditor.config.js"></script>
@@ -20,6 +27,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-offset-2">
+            @include('manage.flash-message')
             <div class="panel panel-success">
                 <div class="panel-heading">
                     创建新产品
@@ -28,13 +36,17 @@
                     {{-- Product Create Form Start --}}
                     @include('manage.product.partials.form', [
                         'method' => 'POST',
-                        'action_url' => url('/product/create'),
+                        'action_url' => url('/products/create'),
                         'action_button' => '创建',
                         'product' => new \App\Product
                     ])
                     {{-- Product Create Form End --}}
                 </div>
             </div>
+        </div>
+        <div class="col-md-4">
+            @include('products.partials.sidebar_latest')
+            @include('products.partials.sidebar_hottest')
         </div>
     </div>
 </div>
@@ -47,16 +59,20 @@
 
             var ue = UE.getEditor('editor');
 
-            setTimeout(function () {
-                ue.execCommand('insertHtml', '<img src="https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/logo_white.png" />');
-            }, 500);
-
             Dropzone.options.dropzoneForm = {
+                init: function () {
+                    this.on('success', function (file, data) {
+                        if (data.status == "ok") {
+                            ue.execCommand('insertHtml', '<img src="' + data.url + '" />');
+                        }
+                    });
+                },
                 paramName: "photo",
-                maxFilesize: 2, // MB
-                accept: function(file, done) {
-                    done();
-                }
+                maxFilesize: 3, // MB
+                acceptedFiles: 'image/*',
+                dictDefaultMessage: "可拖拽图片至此或点击来上传",
+                dictFileTooBig: "上传失败, 图片大小不可超过@{{maxFilesize}}MB",
+                dictInvalidFileType: "文件类型错误"
             };
         })(window);
     </script>

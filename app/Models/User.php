@@ -12,7 +12,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'real_name', 'gender', 'role', 'qq', 'cellphone', 'coop_name', 'taobao', 'coop_phone'
+        'name', 'email', 'password', 'real_name', 'gender', 'role', 'qq', 'cellphone', 'coop_name', 'taobao', 'coop_phone', 'description'
     ];
 
     /**
@@ -66,6 +66,31 @@ class User extends Authenticatable
     }
 
     /**
+     * Paginated products
+     *
+     * @return mixed
+     */
+    public function pagedProducts()
+    {
+        return $this->products()->paginate(35);
+    }
+
+    /**
+     * Get this user's other products
+     *
+     * @param $id
+     * @return mixed
+     */
+    public function otherProducts($id)
+    {
+        $products = Product::where('user_id', $this->id)
+                            ->where('id', '!=', $id)
+                            ->take(5)
+                            ->get();
+        return $products;
+    }
+
+    /**
      * Get the count of one's products
      *
      * @return int
@@ -84,7 +109,7 @@ class User extends Authenticatable
     {
         switch ($this->role) {
             case "individual":
-                $role = "个人";
+                $role = "个体";
                 break;
             case "cooperative":
                 $role = "合作社";
@@ -109,5 +134,15 @@ class User extends Authenticatable
             ->orWhere('real_name', 'like', "%{$keyword}%")
             ->orderBy('name')
             ->paginate(30);
+    }
+
+    /**
+     * The href link for a user
+     *
+     * @return string
+     */
+    public function link()
+    {
+        return action('ProfileController@showProducts', ["id" => $this->id]);
     }
 }

@@ -34,7 +34,22 @@
 
     <!-- JavaScripts -->
     <script src="{{ elixir('js/app.js') }}"></script>
+    <script>
+        $(function () {
+            $('#search-bar').bind('keypress',function(event){
+                if(event.keyCode == "13" && $.trim($('#search-bar').val()) != "")
+                {
+                    window.location.href = "{{ url('/search')}}/" + $('#search-bar').val();
+                }
+            });
 
+            $('#search-btn').on('click', function () {
+                if ($.trim($('#search-bar').val()) != "") {
+                    window.location.href = "{{ url('/search')}}/" + $('#search-bar').val();
+                }
+            });
+        });
+    </script>
     @yield('footer-script')
     <script src="//cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     @stack('scripts')

@@ -49,6 +49,7 @@ a {
     left: -30px;
     color: rgba(0,0,0,0.15);
     @include ts();
+    cursor: pointer;
   }
 }
 
@@ -143,9 +144,17 @@ li {
 
     p {
       line-height: 25px;
+
+      a {
+        font-weight: 800;
+      }
     }
 
     &.essential > p {
+      a {
+        color: #b85c3e;
+      }
+
       &:before {
         content: '精品';
         display: inline-block;
@@ -162,6 +171,7 @@ li {
     }
 
     &.sticky > p {
+
       &:before {
         content: '置顶';
         display: inline-block;
@@ -179,6 +189,10 @@ li {
   }
   span {
     color: #666;
+    margin-right: 10px;
+  }
+  .meta {
+    float: right;
     margin-right: 10px;
   }
   .time {
@@ -256,16 +270,31 @@ li {
     margin-top: 10px;
     .info {
         padding-left: 0;
+        li {
+          line-height: 30px;
+        }
         span {
           display: inline-block;
           width: 5em;
-          color: #666;
+          font-weight: 800;
+          color: rgba(60, 60, 60, 0.5);
         }
     }
     .relate {
       margin-top: 20px;
       padding: 4px 10px;
       background-color: #eee;
+    }
+    #product-description {
+      margin-top: -35px;
+      overflow: hidden;
+      line-height: 25px;
+      img {
+        max-width: 100%;
+        @include br(3px);
+        padding: 0 5px;
+        margin: 5px;
+      }
     }
   }
 }
@@ -301,6 +330,26 @@ form#form {
   label {
     line-height: 34px;
   }
+}
+
+ul.category-list,ul.status-list {
+  margin-left: -25px;
+  li {
+    display: inline-block;
+    padding: 2px;
+
+    &.active {
+      a {
+        color: $primary-link-hover-color;
+        font-weight: 800;
+      }
+    }
+  }
+}
+
+ul.hot-products {
+  margin-left: -40px;
+  line-height: 25px;
 }
 
 // Footer

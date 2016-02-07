@@ -23,7 +23,6 @@
 */
 
 Route::group(['middleware' => ['web']], function () {
-    //
     Route::get('/', 'HomeController@index');
 });
 
@@ -31,16 +30,43 @@ Route::group(['middleware' => 'web'], function () {
     Route::auth();
 
     Route::get('home', 'HomeController@index');
+
+    // Search related
+    Route::get('search/{keyword}', 'HomeController@searchProducts');
+
+    // Product detail
     Route::get('product/{product}', 'ProductsController@productDetails');
+
+    // Other user's products
+    Route::get('user/{user}', 'ProfileController@showProducts');
+
+    // Category related
+    Route::get('category/{category}', 'HomeController@showCategory');
+    Route::get('category/{category}/{status}', 'HomeController@showCategoryWithStatus');
 });
 
 // Routes that needed authenticated logged in users only
 Route::group(['middleware' => ['web','auth'] ], function () {
+    /*
+     * Profile routes
+     */
     Route::get('profile', 'ProfileController@index');
+    Route::post('profile', 'ProfileController@updateProfile');
+
+    Route::get('profile/products', 'ProfileController@myProducts');
+
+    /**
+     * Products routes
+     */
+    // Create related
     Route::get('products/create', 'ProductsController@create');
-    Route::get('products/upload-dropzone', function () {
-        return view('products.partials.upload');
-    });
+    Route::post('products/create', 'ProductsController@saveNewProduct');
+
+    // Edit related
+    Route::get('product/{product}/edit', 'ProductsController@editProduct');
+    Route::post('product/{product}/edit', 'ProductsController@updateProduct');
+
+    // Upload related
     Route::get('products/upload', function () {
         return ['status' => 'success'];
     });
@@ -52,7 +78,7 @@ Route::group(['middleware' => ['web', 'auth', 'role:administrator']], function (
     Route::get('manage','ManageController@index');
 
     /**
-     * Products manage route
+     * Products manage routes
      */
     Route::get('manage/products', 'ManageController@showProducts');
     // Add new related
@@ -65,7 +91,7 @@ Route::group(['middleware' => ['web', 'auth', 'role:administrator']], function (
     Route::delete('manage/product/{product}', 'ManageController@deleteProduct');
 
     /**
-     * Categories manage route
+     * Categories manage routes
      */
     Route::get('manage/categories', 'ManageController@showCategories');
     // Add new related
@@ -78,7 +104,7 @@ Route::group(['middleware' => ['web', 'auth', 'role:administrator']], function (
     Route::delete('manage/category/{category}', 'ManageController@deleteCategory');
 
     /**
-     * Users manage route
+     * Users manage routes
      */
     Route::get('manage/users', 'ManageController@showUsers');
     // Search related
@@ -91,7 +117,7 @@ Route::group(['middleware' => ['web', 'auth', 'role:administrator']], function (
     Route::delete('manage/user/{user}', 'ManageController@deleteUser');
 
     /*
-     * Site configurations related
+     * Site configurations routes
      */
     Route::get('manage/site', 'ManageController@showSiteConfigs');
     Route::post('manage/site', 'ManageController@saveSiteConfigs');

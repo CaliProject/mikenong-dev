@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Category;
 use App\Http\Requests\CreateProductRequest;
 use App\Product;
+use App\ProductView;
 use App\SiteConfiguration;
 use App\User;
 use Illuminate\Http\Request;
@@ -61,6 +62,10 @@ class ManageController extends Controller
         $product = Product::create($request->except('_token', 'editorValue'));
         $product->description = $request->input("editorValue");
         $product->user_id = $request->user()->id;
+
+        $views = new ProductView;
+        $views->product_id = $product->id;
+        $views->save();
 
         return $product->save() ? redirect('/manage/products')->with([
             'status' => 'success',

@@ -5765,20 +5765,26 @@ a:hover {
 
 #dropzone-holder {
   width: 100%;
-  height: 440px; }
+  height: 220px; }
 
 form#dropzone-form {
   position: absolute;
-  top: calc(100% - 610px);
-  height: 400px;
-  overflow: hidden;
-  width: 100%;
-  border: 1px dashed rgba(0, 0, 0, 0.3);
+  top: calc(100% - 390px);
+  left: 8%;
+  height: 200px;
+  overflow: scroll;
+  width: 85%;
+  border: 2px dashed rgba(76, 174, 76, 0.35);
   border-radius: 8px;
   -webkit-border-radius: 8px;
   -moz-border-radius: 8px;
   -ms-border-radius: 8px;
   -o-border-radius: 8px; }
+
+#flash-message {
+  padding: 10px;
+  border-radius: 8px;
+  font-weight: 800; }
 
 #manage-sidebar {
   width: 160px;
@@ -5861,11 +5867,6 @@ i.fa-search {
   -moz-transition: all ease-in-out 0.3s;
   -ms-transition: all ease-in-out 0.3s;
   -o-transition: all ease-in-out 0.3s; }
-
-#flash-message {
-  padding: 10px;
-  border-radius: 8px;
-  font-weight: 800; }
 
 .separator {
   display: block; }

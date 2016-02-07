@@ -20,10 +20,11 @@
             <!-- Left Side Of Navbar -->
             <ul class="nav navbar-nav">
                 @for($i = 1; $i <= 5; $i++)
+                    @unless(\App\SiteConfiguration::getSiteNavLink($i) == '')
                     <li>
-                        <a target="_blank" href="{{ mb_substr(\App\SiteConfiguration::getSiteNavLink($i), mb_strpos(\App\SiteConfiguration::getSiteNavLink($i), "|") + 1) }}">
-                            {{ mb_substr(\App\SiteConfiguration::getSiteNavLink($i), 0, mb_strpos(\App\SiteConfiguration::getSiteNavLink($i), "|")) }}</a>
+                        {!! \App\SiteConfiguration::getSiteNavLink($i) !!}
                     </li>
+                    @endunless
                 @endfor
             </ul>
 
@@ -31,7 +32,7 @@
             <ul class="nav navbar-nav navbar-right">
                 <li>
                     <input type="search" id="search-bar" class="search-bar" maxlength="50" placeholder="搜索...">
-                    <i class="fa fa-search"></i>
+                    <i class="fa fa-search" id="search-btn"></i>
                 </li>
                 <!-- Authentication Links -->
                 @if (Auth::guest())
@@ -42,11 +43,13 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                             {{ Auth::user()->name }} <span class="caret"></span>
                         </a>
-
                         <ul class="dropdown-menu" role="menu">
                             @if(Auth::user()->isManager())
                                 <li><a href="{{ url('/manage') }}"><i class="fa fa-btn fa-dashboard"></i> 后台管理</a></li>
                             @endif
+                            <li><a href="{{ url('/products/create') }}"><i class="fa fa-btn fa-edit"></i> 发布产品信息</a></li>
+                            <li><a href="{{ url('/profile/products') }}"><i class="i fa fa-btn fa-navicon"></i> 我发布的产品</a></li>
+                            <li><a href="{{ url('/profile') }}"><i class="fa fa-btn fa-user"></i> 修改资料</a></li>
                             <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i> 注销</a></li>
                         </ul>
                     </li>

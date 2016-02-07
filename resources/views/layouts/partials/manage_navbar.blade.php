@@ -20,10 +20,11 @@
             <!-- Left Side Of Navbar -->
             <ul class="nav navbar-nav">
                 @for($i = 1; $i <= 5; $i++)
-                    <li>
-                        <a target="_blank" href="{{ mb_substr(\App\SiteConfiguration::getSiteNavLink($i), mb_strpos(\App\SiteConfiguration::getSiteNavLink($i), "|") + 1) }}">
-                            {{ mb_substr(\App\SiteConfiguration::getSiteNavLink($i), 0, mb_strpos(\App\SiteConfiguration::getSiteNavLink($i), "|")) }}</a>
-                    </li>
+                    @unless(\App\SiteConfiguration::getSiteNavLink($i) == '')
+                        <li>
+                            {!! \App\SiteConfiguration::getSiteNavLink($i) !!}
+                        </li>
+                    @endunless
                 @endfor
             </ul>
 

@@ -1,13 +1,15 @@
-<form action="{{ $action_url }}" method="{{ $method }}" class="form-horizontal col-lg-8" id="form">
+<form action="{{ $action_url }}" method="{{ $method }}" class="form-horizontal col-lg-10 col-lg-offset-1" id="form">
     {!! csrf_field() !!}
-    <div class="form-group">
-        <label for="" class="col-lg-2">
-            *用户名
-        </label>
-        <div class="col-lg-8">
-            <input type="text" class="form-control" name="name" value="{{ old('name') ? old('name') : $user->name }}" required>
+    @if(Auth::user()->isManager())
+        <div class="form-group">
+            <label for="" class="col-lg-2">
+                *用户名
+            </label>
+            <div class="col-lg-8">
+                <input type="text" class="form-control" name="name" value="{{ old('name') ? old('name') : $user->name }}" required>
+            </div>
         </div>
-    </div>
+    @endif
     <div class="form-group">
         <label for="" class="col-lg-2">
             *电子邮箱
@@ -24,6 +26,7 @@
             <input type="text" class="form-control" name="real_name" value="{{ old('real_name') ? old('real_name') : $user->real_name }}" required>
         </div>
     </div>
+    @if(Auth::user()->isManager())
     <div class="form-group">
         <label for="" class="col-lg-2">
             *用户类型
@@ -40,6 +43,7 @@
             </div>
         </div>
     </div>
+    @endif
     <div class="form-group">
         <label for="" class="col-lg-2">
             *性别
@@ -69,35 +73,37 @@
             <input type="number" class="form-control" name="cellphone" value="{{ old('cellphone') ? old('cellphone') : $user->cellphone }}">
         </div>
     </div>
-    <div class="form-group">
-        <label for="" class="col-lg-4 separator" style="color: #9b9b9b;">
-            以下为合作社用户专属
-        </label>
-    </div>
-    <div class="form-group">
-        <label for="" class="col-lg-2">
-            合作社名
-        </label>
-        <div class="col-lg-8">
-            <input type="text" class="form-control" name="coop_name" value="{{ old('coop_name') ? old('coop_name') : $user->coop_name }}">
+    @if(Auth::user()->role == 'cooperative' || Auth::user()->isManager())
+        <div class="form-group">
+            <label for="" class="col-lg-4 separator" style="color: #9b9b9b;">
+                以下为合作社用户专属
+            </label>
         </div>
-    </div>
-    <div class="form-group">
-        <label for="" class="col-lg-2">
-            淘宝店铺
-        </label>
-        <div class="col-lg-8">
-            <input type="text" class="form-control" name="taobao" value="{{ old('taobao') ? old('taobao') : $user->taobao }}">
+        <div class="form-group">
+            <label for="" class="col-lg-2">
+                合作社名
+            </label>
+            <div class="col-lg-8">
+                <input type="text" class="form-control" name="coop_name" value="{{ old('coop_name') ? old('coop_name') : $user->coop_name }}">
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        <label for="" class="col-lg-2">
-            合作社电话
-        </label>
-        <div class="col-lg-8">
-            <input type="number" class="form-control" name="coop_phone" value="{{ old('coop_phone') ? old('coop_phone') : $user->coop_phone }}">
+        <div class="form-group">
+            <label for="" class="col-lg-2">
+                淘宝店铺
+            </label>
+            <div class="col-lg-8">
+                <input type="text" class="form-control" name="taobao" value="{{ old('taobao') ? old('taobao') : $user->taobao }}">
+            </div>
         </div>
-    </div>
+        <div class="form-group">
+            <label for="" class="col-lg-2">
+                合作社电话
+            </label>
+            <div class="col-lg-8">
+                <input type="number" class="form-control" name="coop_phone" value="{{ old('coop_phone') ? old('coop_phone') : $user->coop_phone }}">
+            </div>
+        </div>
+    @endif
     <div class="form-group">
         <label for="" class="col-lg-4 separator" style="color: #9b9b9b;">
             更改密码

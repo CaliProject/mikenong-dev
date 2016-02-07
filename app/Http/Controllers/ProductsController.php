@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateProductRequest;
 use App\Product;
+use App\ProductView;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -24,7 +25,7 @@ class ProductsController extends Controller
     }
 
     /**
-     * Upload images
+     * Upload images and return the image url
      *
      * @param Request $request
      * @return array
@@ -41,7 +42,7 @@ class ProductsController extends Controller
 
         $file->move('products/uploads/photos', $name);
 
-        return ['status' => 'ok', 'url' => $file->getClientOriginalName()];
+        return ['status' => 'ok', 'url' => url('products/uploads/photos') . "/{$name}"];
     }
 
     /**
@@ -55,6 +56,10 @@ class ProductsController extends Controller
         $product = Product::create($request->except('_token', 'editorValue'));
         $product->description = $request->input("editorValue");
         $product->user_id = $request->user()->id;
+
+        $views = new ProductView;
+        $views->product_id = $product->id;
+        $views->save();
 
         return $product->save() ? redirect('/')->with([
             'status' => 'success',
@@ -73,6 +78,39 @@ class ProductsController extends Controller
      */
     public function productDetails(Product $product)
     {
+        $product->clicked();
         return view('products.details', compact('product'));
+    }
+
+    /**
+     * Display view for editing a product
+     *
+     * @param Product $product
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function editProduct(Product $product)
+    {
+        return view('products.edit', compact('product'));
+    }
+
+    /**
+     * Update a product
+     *
+     * @param CreateProductRequest $request
+     * @param Product $product
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function updateProduct(CreateProductRequest $request, Product $product)
+    {
+        $product->update($request->except(['_token','editorValue']));
+        $product->description = $request->input("editorValue");
+
+        return $product->save() ? redirect()->back()->with([
+            'status' => 'success',
+            'message' => '产品更新成功'
+        ]) : redirect()->back()->with([
+            'status' => 'error',
+            'message' => '产品更新失败, 请重试'
+        ]);
     }
 }

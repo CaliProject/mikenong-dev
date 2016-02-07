@@ -29,15 +29,22 @@ a {
 
 #dropzone-holder {
   width: 100%;
-  height: 440px;
+  height: 220px;
 }
 
 form#dropzone-form {
   position: absolute;
-  top: calc(100% - 610px);
-  height: 400px;
-  overflow: hidden;
-  width: 100%;
-  border: 1px dashed rgba(0, 0, 0, 0.3);
+  top: calc(100% - 390px);
+  left: 8%;
+  height: 200px;
+  overflow: scroll;
+  width: 85%;
+  border: 2px dashed rgba($primary-link-hover-color, 0.35);
   @include br();
+}
+
+#flash-message {
+  padding: 10px;
+  border-radius: 8px;
+  font-weight: 800;
 }

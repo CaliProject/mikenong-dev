@@ -24,6 +24,7 @@ elixir(function(mix) {
 
     mix.scripts([
         'jquery.min.js',
+        'dropzone.js'
     ], 'public/js/manage.js');
 
     mix.version([

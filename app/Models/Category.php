@@ -12,6 +12,16 @@ class Category extends Model
     ];
 
     /**
+     * Parent category
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function parent()
+    {
+        return $this->belongsTo('App\Category', 'parent_id');
+    }
+
+    /**
      * Scope a query with only super categories (That belong to no category)
      *
      * @param $query
@@ -66,12 +76,68 @@ class Category extends Model
     }
 
     /**
+     * See if this category has a parent category
+     *
+     * @return bool
+     */
+    public function hasParent()
+    {
+        return $this->parent_id != 0;
+    }
+
+    /**
      * Get the current category parent's name
      *
      * @return Category
      */
     public function parentName()
     {
-        return $this->parent_id ? Category::findOrFail($this->parent_id)->name : "无";
+        return $this->parent ? $this->parent->name : "无";
+    }
+
+    /**
+     * The href link for a category
+     *
+     * @return string
+     */
+    public function link()
+    {
+        return action('HomeController@showCategory', ["id" => $this->id]);
+    }
+
+    /**
+     * The href link for sorting in provide status
+     * @return string
+     */
+    public function provideLink()
+    {
+        return $this->link() . '/provide';
+    }
+
+    /**
+     * The href link for sorting in demand status
+     * @return string
+     */
+    public function demandLink()
+    {
+        return $this->link() . '/demand';
+    }
+
+    /**
+     * Relationship to its multiple products
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function products()
+    {
+        return $this->hasMany('App\Product');
+    }
+
+    /**
+     * @return mixed
+     */
+    public function pagedProducts()
+    {
+        return $this->products()->paginate(35);
     }
 }

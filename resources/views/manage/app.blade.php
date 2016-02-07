@@ -3,8 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>@yield('title') | {{ \App\SiteConfiguration::getSiteName() }} - 后台管理</title>
-    <meta name="description" content="{{ \App\SiteConfiguration::getSiteDescription() }}">
-    <meta name="keywords" content="{{ \App\SiteConfiguration::getSiteKeywords() }}">
 
     <!-- Fonts -->
     <link href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">

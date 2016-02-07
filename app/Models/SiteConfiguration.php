@@ -83,7 +83,10 @@ class SiteConfiguration extends Model
      */
     public static function getSiteNavLink($i)
     {
-        return static::getValueByKey("nav.link.{$i}");
+        $value = static::getValueByKey("nav.link.{$i}");
+
+        return $value == "" ? '' : '<a target="_blank" href="'. mb_substr($value, mb_strpos($value, "|") + 1). '"> ' .
+            mb_substr($value, 0, mb_strpos($value, "|")) . '</a>';
     }
 
     /**

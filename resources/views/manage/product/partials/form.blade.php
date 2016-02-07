@@ -75,17 +75,17 @@
         </label>
         <div class="col-lg-10">
             <select name="category_id" id="" class="form-control">
-                <option value="0">无</option>
                 @forelse(\App\Category::allSubCategories() as $category)
                     <option value="{{ $category->id }}"{{ $product->category ? $product->category->id == $category->id ? " selected" : "" : "" }}>{{ $category->name }}</option>
                 @empty
+                    <option value="0">无</option>
                 @endforelse
             </select>
         </div>
     </div>
     <div class="form-group">
         <label for="" class="col-lg-2">
-            *价格
+            *最新报价
         </label>
         <div class="col-lg-10">
             <input type="text" class="form-control" name="pricing" value="{{ old('pricing') ? old('pricing') : $product->pricing }}" required>
@@ -106,32 +106,34 @@
             </div>
         </div>
     </div>
-    <div class="form-group">
-        <label for="" class="col-lg-2">
-            是否置顶
-        </label>
-        <div class="col-lg-10">
-            <div class="radio-inline">
-                <input type="radio" value="1" name="is_sticky"{{ $product->is_sticky == 1 ? " checked" : "" }}>是
-            </div>
-            <div class="radio-inline">
-                <input type="radio" value="0" name="is_sticky"{{ $product->is_sticky == 0 ? " checked" : "" }}>否
-            </div>
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="" class="col-lg-2">
-            是否精品
-        </label>
-        <div class="col-lg-10">
-            <div class="radio-inline">
-                <input type="radio" value="1" name="is_essential"{{ $product->is_essential == 1 ? " checked" : "" }}>是
-            </div>
-            <div class="radio-inline">
-                <input type="radio" value="0" name="is_essential"{{ $product->is_essential == 0 ? " checked" : "" }}>否
+    @if(Auth::user()->isManager())
+        <div class="form-group">
+            <label for="" class="col-lg-2">
+                是否置顶
+            </label>
+            <div class="col-lg-10">
+                <div class="radio-inline">
+                    <input type="radio" value="1" name="is_sticky"{{ $product->is_sticky == 1 ? " checked" : "" }}>是
+                </div>
+                <div class="radio-inline">
+                    <input type="radio" value="0" name="is_sticky"{{ $product->is_sticky == 0 ? " checked" : "" }}>否
+                </div>
             </div>
         </div>
-    </div>
+        <div class="form-group">
+            <label for="" class="col-lg-2">
+                是否精品
+            </label>
+            <div class="col-lg-10">
+                <div class="radio-inline">
+                    <input type="radio" value="1" name="is_essential"{{ $product->is_essential == 1 ? " checked" : "" }}>是
+                </div>
+                <div class="radio-inline">
+                    <input type="radio" value="0" name="is_essential"{{ $product->is_essential == 0 ? " checked" : "" }}>否
+                </div>
+            </div>
+        </div>
+    @endif
     <div class="form-group">
         <div class="col-lg-10 col-lg-offset-2">
             <button type="submit" class="btn btn-success col-sm-12">{{ $action_button }}</button>

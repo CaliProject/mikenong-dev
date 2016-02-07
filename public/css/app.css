@@ -5765,20 +5765,26 @@ a:hover {
 
 #dropzone-holder {
   width: 100%;
-  height: 440px; }
+  height: 220px; }
 
 form#dropzone-form {
   position: absolute;
-  top: calc(100% - 610px);
-  height: 400px;
-  overflow: hidden;
-  width: 100%;
-  border: 1px dashed rgba(0, 0, 0, 0.3);
+  top: calc(100% - 390px);
+  left: 8%;
+  height: 200px;
+  overflow: scroll;
+  width: 85%;
+  border: 2px dashed rgba(76, 174, 76, 0.35);
   border-radius: 8px;
   -webkit-border-radius: 8px;
   -moz-border-radius: 8px;
   -ms-border-radius: 8px;
   -o-border-radius: 8px; }
+
+#flash-message {
+  padding: 10px;
+  border-radius: 8px;
+  font-weight: 800; }
 
 body {
   font-family: "Microsoft Yahei", "微软雅黑", "Helvetica Neue", Helvetica, Arial, sans-serif; }
@@ -5823,7 +5829,8 @@ a:hover {
     -webkit-transition: all ease-in-out 0.3s;
     -moz-transition: all ease-in-out 0.3s;
     -ms-transition: all ease-in-out 0.3s;
-    -o-transition: all ease-in-out 0.3s; }
+    -o-transition: all ease-in-out 0.3s;
+    cursor: pointer; }
 
 .banner {
   width: 100%;
@@ -5900,6 +5907,10 @@ li {
     margin-bottom: 10px; }
     .home-list li p {
       line-height: 25px; }
+      .home-list li p a {
+        font-weight: 800; }
+    .home-list li.essential > p a {
+      color: #b85c3e; }
     .home-list li.essential > p:before {
       content: '精品';
       display: inline-block;
@@ -5930,6 +5941,9 @@ li {
       left: 0px; }
   .home-list span {
     color: #666;
+    margin-right: 10px; }
+  .home-list .meta {
+    float: right;
     margin-right: 10px; }
   .home-list .time {
     float: right;
@@ -5987,14 +6001,30 @@ li {
   margin-top: 10px; }
   .details-body .details-content .info {
     padding-left: 0; }
+    .details-body .details-content .info li {
+      line-height: 30px; }
     .details-body .details-content .info span {
       display: inline-block;
       width: 5em;
-      color: #666; }
+      font-weight: 800;
+      color: rgba(60, 60, 60, 0.5); }
   .details-body .details-content .relate {
     margin-top: 20px;
     padding: 4px 10px;
     background-color: #eee; }
+  .details-body .details-content #product-description {
+    margin-top: -35px;
+    overflow: hidden;
+    line-height: 25px; }
+    .details-body .details-content #product-description img {
+      max-width: 100%;
+      border-radius: 3px;
+      -webkit-border-radius: 3px;
+      -moz-border-radius: 3px;
+      -ms-border-radius: 3px;
+      -o-border-radius: 3px;
+      padding: 0 5px;
+      margin: 5px; }
 
 .related-panel ul {
   padding-left: 0;
@@ -6018,6 +6048,19 @@ form#form {
   margin: 10px 0; }
   form#form label {
     line-height: 34px; }
+
+ul.category-list, ul.status-list {
+  margin-left: -25px; }
+  ul.category-list li, ul.status-list li {
+    display: inline-block;
+    padding: 2px; }
+    ul.category-list li.active a, ul.status-list li.active a {
+      color: #4cae4c;
+      font-weight: 800; }
+
+ul.hot-products {
+  margin-left: -40px;
+  line-height: 25px; }
 
 .footer {
   margin: 20px 0 0 0;
