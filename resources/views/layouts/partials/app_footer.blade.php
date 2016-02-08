@@ -8,7 +8,7 @@
         <div class="row"><div class="col-md-8 col-md-offset-2"><div class="footer-separator"></div></div></div>
         <div class="row">
             <div class="copyright">
-                <p>&copy; {{ date("Y") }} - 米科农网  版权所有 ICP证: {{ \App\SiteConfiguration::getSiteBeian() }}</p>
+                <p>&copy; {{ date("Y") }} - {{ \App\SiteConfiguration::getSiteName() }}  版权所有 ICP证: {{ \App\SiteConfiguration::getSiteBeian() }}</p>
             </div>
         </div>
     </div>
