@@ -45,7 +45,7 @@ class ViewComposerServiceProvider extends ServiceProvider
     protected function composeSidebarHottest()
     {
         view()->composer('products.partials.sidebar_hottest', function ($view) {
-            $view->with('hottest_cooperatives', User::cooperatives()->take(5)->get());
+            $view->with('hottest_cooperatives', User::cooperatives()->take(8)->get());
         });
     }
 }

@@ -94,6 +94,7 @@
 			@include('products.partials.sidebar_author', ["user" => $product->user])
 			@include('products.partials.sidebar_latest')
             @include('products.partials.sidebar_hottest')
+            @include('products.partials.sidebar_images')
 		</div>
     </div>
 </div>

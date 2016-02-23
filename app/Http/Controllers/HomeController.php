@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Category;
 use App\Http\Requests;
 use App\Product;
+use App\User;
+//use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -67,5 +69,17 @@ class HomeController extends Controller
     {
         $products = Product::sortedCategoryAndStatus($category, $status);
         return view('categories.show', compact('category', 'products' ,'status'));
+    }
+
+    /**
+     * Show all cooperatives
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function showCooperatives()
+    {
+        $cooperatives = User::cooperatives()->hot()->paginate();
+
+        return view('users.cooperatives', compact("cooperatives"));
     }
 }

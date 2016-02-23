@@ -46,6 +46,8 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('category/{category}', 'HomeController@showCategory');
     Route::get('categories', 'HomeController@showAllCategories');
     Route::get('category/{category}/{status}', 'HomeController@showCategoryWithStatus');
+
+    Route::get('cooperatives', 'HomeController@showCooperatives');
 });
 
 // Routes that needed authenticated logged in users only

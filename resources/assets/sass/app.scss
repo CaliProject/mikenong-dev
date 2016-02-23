@@ -188,6 +188,22 @@ li {
         left: 0px;
       }
     }
+
+    &.user-sticky > p {
+      &:before {
+        content: '优秀';
+        display: inline-block;
+        position: relative;
+        padding: 0 5px;
+        margin: 0 5px;
+        color: #F9FCF9;
+        background: #5CB85C;
+        font-size: 15px;
+        border-radius: 3px;
+        top: 2px;
+        left: 0px;
+      }
+    }
   }
   span {
     color: #666;

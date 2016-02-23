@@ -24,6 +24,8 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    protected $perPage = 35;
+
     /**
      * @param $query
      * @return mixed
@@ -40,6 +42,15 @@ class User extends Authenticatable
     public static function scopeHottest($query)
     {
         return $query->where('is_essential', true);
+    }
+
+    /**
+     * @param $query
+     * @return mixed
+     */
+    public static function scopeHot($query)
+    {
+        return $query->orderBy('is_essential', 'desc');
     }
 
     /**

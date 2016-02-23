@@ -8,5 +8,10 @@
                 <li>暂无合作社</li>
             @endforelse
         </ul>
+        @if(count($hottest_cooperatives) == 8)
+        <div class="navbar-right" style="margin-right: 8px">
+            <a href="{{ url('cooperatives') }}">查看全部 <i class="fa fa-angle-double-right"></i></a>
+        </div>
+        @endif
     </div>
 </div>
