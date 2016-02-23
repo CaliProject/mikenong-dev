@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateProductRequest;
+use App\Page;
 use App\Product;
 use App\ProductView;
 use Illuminate\Http\Request;
@@ -33,12 +34,12 @@ class ProductsController extends Controller
     public function upload(Request $request)
     {
         $this->validate($request, [
-            'photo' => 'required|mimes:jpg,jpeg,png,bmp,gif'
+            'photo' => 'required'
         ]);
 
         $file = $request->file('photo');
 
-        $name = time() . $file->getClientOriginalName();
+        $name = time() . strtolower($file->getClientOriginalName());
 
         $file->move('products/uploads/photos', $name);
 
@@ -112,5 +113,16 @@ class ProductsController extends Controller
             'status' => 'error',
             'message' => '产品更新失败, 请重试'
         ]);
+    }
+
+    /**
+     * Page details
+     *
+     * @param Page $page
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function pageDetails(Page $page)
+    {
+        return view('pages.details', compact('page'));
     }
 }

@@ -49,7 +49,7 @@
                         <input type="number" class="form-control" name="qq" value="{{ \App\SiteConfiguration::getSiteServiceQQ() }}">
                     </div>
                 </div>
-                @for($i = 1; $i <= 5; $i++)
+                @for($i = 1; $i <= 8; $i++)
                     <div class="form-group">
                         <label for="" class="col-lg-2">
                             导航菜单{{ $i }}

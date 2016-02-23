@@ -72,7 +72,7 @@
 @section('footer-script')
     <script>
         function deleteProduct(el) {
-            if (confirm("确定要删除该用户吗?")) {
+            if (confirm("确定要删除该产品吗?")) {
                 $.ajax({
                     url: "{{ url('/manage/product/') }}/" + el.attr('data-id'),
                     type: "DELETE",
@@ -82,7 +82,7 @@
                         if (json.status == "success") {
                             window.location.href = "{{ url()->current() }}";
                         } else {
-                            alert('删除用户失败,请重试');
+                            alert('删除产品失败,请重试');
                         }
                     }
                 });

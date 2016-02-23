@@ -102,7 +102,7 @@ class SiteConfiguration extends Model
         static::where('key', 'site.keywords')->update(['value' => $request->input('keywords')]);
         static::where('key', 'beian')->update(['value' => $request->input('beian')]);
         static::where('key', 'qq')->update(['value' => $request->input('qq')]);
-        for ($i = 0; $i < 5; $i++) {
+        for ($i = 1; $i <= 8; $i++) {
             static::where('key', "nav.link.{$i}")->update(['value' => $request->input("link{$i}")]);
         }
     }

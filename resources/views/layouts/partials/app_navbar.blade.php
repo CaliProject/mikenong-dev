@@ -11,7 +11,7 @@
             </button>
 
             <!-- Branding Image -->
-            <a class="navbar-brand" href="{{ url('/') }}">
+            <a class="navbar-brand" href="{{ url('/') }}" style="font-size: 28px; font-weight: bold; color: #DA6969 !important">
                 {{ \App\SiteConfiguration::getSiteName() }}
             </a>
         </div>

@@ -4,7 +4,7 @@
             <p>
                 <span>[{{ $product->readableStatus() }}]</span>
                 <a href="{{ $product->link() }}">{{ $product->title }}</a>
-                <span class="time">{{ $product->created_at->diffForHumans() }}</span>
+                <span class="time">{{ $product->created_at->format('Y-m-d') }}</span>
             </p>
         </li>
     @empty

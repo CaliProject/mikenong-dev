@@ -18,15 +18,17 @@
 								<ul>
 								    <li>时间：{{ $product->created_at->format("Y年m月d日 H:i") }}</li>
 								    <li>浏览次数：{{ isset($product->views) ? $product->views->views : '1' }}</li>
-                                    @if(Auth::user()->isManager())
-                                        <li class="navbar-right">
-                                            <a href="{{ action('ManageController@editProduct', ["id" => $product->id]) }}">编辑</a>
-                                        </li>
-                                    @elseif(Auth::user()->id == $product->user->id)
-                                        <li class="navbar-right">
-                                            <a href="{{ action('ManageController@editProduct', ["id" => $product->id]) }}">编辑</a>
-                                        </li>
-                                    @endif
+                                    @unless(Auth::guest())
+                                        @if(Auth::user()->isManager())
+                                            <li class="navbar-right">
+                                                <a href="{{ action('ManageController@editProduct', ["id" => $product->id]) }}">编辑</a>
+                                            </li>
+                                        @elseif(Auth::user()->id == $product->user->id)
+                                            <li class="navbar-right">
+                                                <a href="{{ action('ManageController@editProduct', ["id" => $product->id]) }}">编辑</a>
+                                            </li>
+                                        @endif
+                                    @endunless
 								</ul>
 							</div>
 						</div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Http\Requests\CreateProductRequest;
+use App\Page;
 use App\Product;
 use App\ProductView;
 use App\SiteConfiguration;
@@ -402,5 +403,81 @@ class ManageController extends Controller
     public function rollback()
     {
         return Artisan::call('migrate:rollback');
+    }
+
+    /**
+     * Show all pages
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function showPages()
+    {
+        $pages = Page::all();
+
+        return view('manage.page.all', compact('pages'));
+    }
+
+    /**
+     * Show create page
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function createPage()
+    {
+        return view('manage.page.add', ["page" => new Page]);
+    }
+
+    /**
+     * Create a new page
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function saveNewPage(Request $request)
+    {
+        $page = Page::create($request->all());
+
+        $page->update(["content" => $request->input('editorValue')]);
+
+        return redirect('manage/pages')->with(['status' => 'success', 'message' => '创建成功']);
+    }
+
+    /**
+     * Show the edit page
+     *
+     * @param Page $page
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function editPage(Page $page)
+    {
+        return view('manage.page.edit', compact('page'));
+    }
+
+    /**
+     * Save a page
+     *
+     * @param Request $request
+     * @param Page $page
+     * @return $this|\Illuminate\Http\RedirectResponse
+     */
+    public function savePage(Request $request, Page $page)
+    {
+        $page->update($request->all());
+        $page->content = $request->input("editorValue");
+        $page->save();
+
+        return  redirect()->back()->with(['status' => 'success', 'message' => '更新成功']);
+    }
+
+    /**
+     * Deletes a page
+     *
+     * @param Page $page
+     * @return array
+     * @throws \Exception
+     */
+    public function deletePage(Page $page)
+    {
+        return $page->delete() ? ['status' => 'success', 'message' => '成功删除'] : ['status' => "error", 'message' => '删除失败'];
     }
 }

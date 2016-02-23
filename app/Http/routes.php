@@ -37,6 +37,8 @@ Route::group(['middleware' => 'web'], function () {
     // Product detail
     Route::get('product/{product}', 'ProductsController@productDetails');
 
+    Route::get('pages/{page}', 'ProductsController@pageDetails');
+
     // Other user's products
     Route::get('user/{user}', 'ProfileController@showProducts');
 
@@ -130,4 +132,14 @@ Route::group(['middleware' => ['web', 'auth', 'role:administrator']], function (
      */
     Route::get('manage/migrate', 'ManageController@migrate');
     Route::get('manage/migrate/rollback', 'ManageController@rollback');
+
+    /*
+     * Pages routes
+     */
+    Route::get('manage/pages', 'ManageController@showPages');
+    Route::get('manage/pages/add', 'ManageController@createPage');
+    Route::post('manage/pages/add', 'ManageController@saveNewPage');
+    Route::get('manage/pages/{page}', 'ManageController@editPage');
+    Route::post('manage/pages/{page}', 'ManageController@savePage');
+    Route::delete('manage/pages/{page}', 'ManageController@deletePage');
 });

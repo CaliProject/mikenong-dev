@@ -1,5 +1,5 @@
 <div class="panel panel-success">
-    <div class="panel-heading">最新报价</div>
+    <div class="panel-heading">优秀合作社</div>
     <div class="panel-body">
         <ul class="home-cooperation">
             @forelse($latest as $product)

@@ -11,7 +11,26 @@
                 {{-- Banner End --}}
                 <div class="panel panel-success">
                     <div class="panel-heading">
-                        产品信息
+                        最新公告
+                    </div>
+                    <div class="panel-body">
+                        <ul class="home-list">
+                            @forelse(\App\Page::all() as $page)
+                                <li class="page">
+                                    <p>
+                                        <a href="{{ $page->link() }}">{{ $page->title }}</a>
+                                        <span class="time">{{ $page->created_at->format("Y-m-d") }}</span>
+                                    </p>
+                                </li>
+                            @empty
+                                <li><p>暂无公告</p></li>
+                            @endforelse
+                        </ul>
+                    </div>
+                </div>
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        农产品供求信息
                     </div>
                     <div class="panel-body">
                         {{-- Product List Start --}}
