@@ -26,7 +26,7 @@
             <input type="text" class="form-control" name="real_name" value="{{ old('real_name') ? old('real_name') : $user->real_name }}" required>
         </div>
     </div>
-    @if(Auth::user()->isManager())
+    @if(Auth::user()->isManager() && $user->role == "cooperative")
     <div class="form-group">
         <label for="" class="col-lg-2">
             *用户类型
@@ -41,6 +41,13 @@
             <div class="radio-inline">
                 <input type="radio" name="role" value="administrator"{{ $user->role == "administrator" ? " checked" : "" }}>管理员
             </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="" class="col-lg-2">优秀合作社</label>
+        <div class="col-lg-8">
+            <div class="radio-inline"><input type="radio" name="is_essential" value="on"{{ $user->is_essential ? " checked" : "" }}>优秀</div>
+            <div class="radio-inline"><input type="radio" name="is_essential" value="off"{{ !$user->is_essential ? " checked" : "" }}>否</div>
         </div>
     </div>
     @endif
@@ -63,6 +70,22 @@
         </label>
         <div class="col-lg-8">
             <input type="number" class="form-control" name="qq" value="{{ old('qq') ? old('qq') : $user->qq }}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="" class="col-lg-2">
+            地址
+        </label>
+        <div class="col-lg-8">
+            <input type="text" class="form-control" name="address" value="{{ old('address') ? old('address') : $user->address }}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="" class="col-lg-2">
+            介绍
+        </label>
+        <div class="col-lg-8">
+            <textarea class="form-control" name="description" id="">{!! $user->description !!}</textarea>
         </div>
     </div>
     <div class="form-group">

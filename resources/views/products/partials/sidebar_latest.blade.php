@@ -1,11 +1,11 @@
 <div class="panel panel-success">
     <div class="panel-heading">优秀合作社</div>
     <div class="panel-body">
-        <ul class="home-cooperation">
-            @forelse($latest as $product)
-                <li><span class="time">{{ $product->updated_at->diffForHumans() }}</span><a href="{{ action('ProductsController@productDetails', ["id" => $product->id]) }}">{{ $product->pricing }}</a></li>
+        <ul class="hot-products">
+            @forelse($latest_cooperatives as $cooperative)
+                <li><a href="{{ $cooperative->link() }}">{{ $cooperative->coop_name }}</a></li>
             @empty
-                <li>暂无产品</li>
+                <li>暂无优秀合作社</li>
             @endforelse
         </ul>
     </div>

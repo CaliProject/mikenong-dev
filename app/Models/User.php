@@ -12,7 +12,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'real_name', 'gender', 'role', 'qq', 'cellphone', 'coop_name', 'taobao', 'coop_phone', 'description'
+        'name', 'email', 'password', 'real_name', 'gender', 'role', 'qq', 'cellphone', 'coop_name', 'taobao', 'coop_phone', 'description', 'is_essential', 'address'
     ];
 
     /**
@@ -23,6 +23,24 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * @param $query
+     * @return mixed
+     */
+    public static function scopeCooperatives($query)
+    {
+        return $query->where('role', 'cooperative');
+    }
+
+    /**
+     * @param $query
+     * @return mixed
+     */
+    public static function scopeHottest($query)
+    {
+        return $query->where('is_essential', true);
+    }
 
     /**
      * Detect if the user has a given role
@@ -144,5 +162,15 @@ class User extends Authenticatable
     public function link()
     {
         return action('ProfileController@showProducts', ["id" => $this->id]);
+    }
+
+    /**
+     * Mutator
+     *
+     * @param $value
+     */
+    public function setIsEssentialAttribute($value)
+    {
+        $this->attributes["is_essential"] = $value == "on";
     }
 }

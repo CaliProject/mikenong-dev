@@ -70,6 +70,12 @@
         </div>
     </div>
     <div class="form-group">
+        <label for="" class="col-lg-2">淘宝地址</label>
+        <div class="col-lg-10">
+            <input type="text" class="form-control" name="taobao" value="{{ old('taobao') ? old('taobao') : $product->taobao }}">
+        </div>
+    </div>
+    <div class="form-group">
         <label for="" class="col-lg-2">
             所属分类
         </label>

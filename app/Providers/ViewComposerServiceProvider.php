@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Product;
+use App\User;
 use Illuminate\Support\ServiceProvider;
 
 class ViewComposerServiceProvider extends ServiceProvider
@@ -34,7 +35,7 @@ class ViewComposerServiceProvider extends ServiceProvider
     protected function composeSidebarLatest()
     {
         view()->composer('products.partials.sidebar_latest', function ($view) {
-            $view->with('latest', Product::latest()->take(5)->get());
+            $view->with('latest_cooperatives', User::hottest()->take(8)->get());
         });
     }
 
@@ -44,7 +45,7 @@ class ViewComposerServiceProvider extends ServiceProvider
     protected function composeSidebarHottest()
     {
         view()->composer('products.partials.sidebar_hottest', function ($view) {
-            $view->with('hottest_products', Product::hottest());
+            $view->with('hottest_cooperatives', User::cooperatives()->take(5)->get());
         });
     }
 }

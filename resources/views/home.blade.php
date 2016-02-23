@@ -11,7 +11,7 @@
                 {{-- Banner End --}}
                 <div class="panel panel-success">
                     <div class="panel-heading">
-                        最新公告
+                        产业新闻
                     </div>
                     <div class="panel-body">
                         <ul class="home-list">

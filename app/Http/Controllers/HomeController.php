@@ -46,6 +46,19 @@ class HomeController extends Controller
     }
 
     /**
+     * Show all categories
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function showAllCategories()
+    {
+        $products = Product::paginate(35);
+        $category = null;
+
+        return view('categories.show', compact('products', 'category'));
+    }
+
+    /**
      * @param Category $category
      * @param $status
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View

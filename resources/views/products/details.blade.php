@@ -59,8 +59,8 @@
                                 @unless($product->cellphone == "")
                                     <li><span>手机号码</span>{{ $product->cellphone }}</li>
                                 @endunless
-                                @unless($product->user->taobao == "")
-                                    <li><span>淘宝店铺</span><a href="{{ $product->user->taobao }}" target="_blank">{{ $product->user->taobao }}</a></li>
+                                @unless($product->taobao == "")
+                                    <li><span>淘宝店铺</span><a href="{{ $product->taobao }}" target="_blank" style="font-size: 17px;font-weight: bold;">{{ $product->user->taobao }}</a></li>
                                 @endunless
                                 <li><span>产品类别</span>{{ $product->category->name }}</li>
                                 @unless($product->pricing == "")

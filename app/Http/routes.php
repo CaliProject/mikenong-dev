@@ -44,6 +44,7 @@ Route::group(['middleware' => 'web'], function () {
 
     // Category related
     Route::get('category/{category}', 'HomeController@showCategory');
+    Route::get('categories', 'HomeController@showAllCategories');
     Route::get('category/{category}/{status}', 'HomeController@showCategoryWithStatus');
 });
 
