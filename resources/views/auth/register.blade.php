@@ -87,11 +87,16 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <label class="col-md-4 control-label">真实姓名</label>
+                        <div class="form-group{{ $errors->has('real_name') ? " has-error" : "" }}">
+                            <label class="col-md-4 control-label">*真实姓名</label>
 
                             <div class="col-md-6">
                                 <input type="text" class="form-control" name="real_name" value="{{ old('real_name') }}" required>
+                                @if ($errors->has('real_name'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('real_name') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                         </div>
 
@@ -113,11 +118,16 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <label class="col-md-4 control-label">联系电话</label>
+                        <div class="form-group{{ $errors->has('cellphone') ? " has-error" : "" }}">
+                            <label class="col-md-4 control-label">*联系电话</label>
 
                             <div class="col-md-6">
-                                <input type="number" class="form-control" name="cellphone" value="{{ old('cellphone') }}" maxlength="11">
+                                <input type="number" class="form-control" name="cellphone" value="{{ old('cellphone') }}" maxlength="11" required>
+                                @if ($errors->has('cellphone'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('cellphone') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                         </div>
 
@@ -130,26 +140,41 @@
                         </div>
 
                         <div id="cooperative-related-inputs" style="display: none;">
-                            <div class="form-group">
-                                <label for="" class="col-md-4 control-label">合作社名字</label>
+                            <div class="form-group{{ $errors->has('coop_name') ? " has-error" : "" }}">
+                                <label for="" class="col-md-4 control-label">*合作社名字</label>
 
                                 <div class="col-md-6">
                                     <input type="text" name="coop_name" class="form-control" value="{{ old('coop_name') }}">
+                                    @if ($errors->has('coop_name'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('coop_name') }}</strong>
+                                    </span>
+                                    @endif
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label for="" class="col-md-4 control-label">淘宝链接</label>
+                            <div class="form-group{{ $errors->has('taobao') ? " has-error" : "" }}">
+                                <label for="" class="col-md-4 control-label">*淘宝链接</label>
 
                                 <div class="col-md-6">
                                     <input type="text" name="taobao" class="form-control" value="{{ old('taobao') }}">
+                                    @if ($errors->has('taobao'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('taobao') }}</strong>
+                                    </span>
+                                    @endif
                                 </div>
                             </div>
 
-                            <div class="form-group">
-                                <label for="" class="col-md-4 control-label">合作社电话</label>
+                            <div class="form-group{{ $errors->has('coop_phone') ? " has-error" : "" }}">
+                                <label for="" class="col-md-4 control-label">*合作社电话</label>
 
                                 <div class="col-md-6">
                                     <input type="number" name="coop_phone" class="form-control" value="{{ old('coop_phone') }}">
+                                    @if ($errors->has('coop_phone'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('coop_phone') }}</strong>
+                                    </span>
+                                    @endif
                                 </div>
                             </div>
                         </div>

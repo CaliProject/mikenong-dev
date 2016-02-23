@@ -55,6 +55,7 @@ class AuthController extends Controller
             'role' => 'required',
             'real_name' => 'required',
             'gender' => 'required',
+            'cellphone' => 'required|numeric'
         ]);
     }
 

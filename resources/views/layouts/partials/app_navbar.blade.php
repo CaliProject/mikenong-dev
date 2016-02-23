@@ -19,7 +19,7 @@
         <div class="collapse navbar-collapse" id="app-navbar-collapse">
             <!-- Left Side Of Navbar -->
             <ul class="nav navbar-nav">
-                @for($i = 1; $i <= 5; $i++)
+                @for($i = 1; $i <= 8; $i++)
                     @unless(\App\SiteConfiguration::getSiteNavLink($i) == '')
                     <li>
                         {!! \App\SiteConfiguration::getSiteNavLink($i) !!}

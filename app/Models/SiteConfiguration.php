@@ -85,7 +85,11 @@ class SiteConfiguration extends Model
     {
         $value = static::getValueByKey("nav.link.{$i}");
 
-        return $value == "" ? '' : '<a target="_blank" href="'. mb_substr($value, mb_strpos($value, "|") + 1). '"> ' .
+        $url = mb_substr($value, mb_strpos($value, "|") + 1);
+
+        $url = str_contains($url, 'http://') ? $url : "http://" . $url;
+
+        return $value == "" ? '' : '<a target="_blank" href="'. $url . '"> ' .
             mb_substr($value, 0, mb_strpos($value, "|")) . '</a>';
     }
 
@@ -102,8 +106,53 @@ class SiteConfiguration extends Model
         static::where('key', 'site.keywords')->update(['value' => $request->input('keywords')]);
         static::where('key', 'beian')->update(['value' => $request->input('beian')]);
         static::where('key', 'qq')->update(['value' => $request->input('qq')]);
-        for ($i = 1; $i <= 8; $i++) {
+        static::where('key', 'qrcodes.1')->update(['value' => $request->input('qrcode')]);
+        for ($i = 1; $i <= 8; $i++)
             static::where('key', "nav.link.{$i}")->update(['value' => $request->input("link{$i}")]);
-        }
+        for ($i = 1; $i <= 3; $i++)
+            static::where('key', "sidebar.images.{$i}")->update(['value' => $request->input("sidebar{$i}")]);
+        for ($i = 1; $i <= 20; $i++)
+            static::where('key', "footer.link.{$i}")->update(['value' => $request->input("footer-link{$i}")]);
+    }
+
+    /**
+     * @param $i
+     * @return mixed
+     */
+    public static function getFriendLink($i)
+    {
+        $value = static::getValueByKey("footer.link.{$i}");
+
+        $url = mb_substr($value, mb_strpos($value, "|") + 1);
+
+        $url = str_contains($url, 'http://') ? $url : "http://" . $url;
+
+        return $value == "" ? '' : '<a target="_blank" href="'. $url . '"> ' .
+            mb_substr($value, 0, mb_strpos($value, "|")) . '</a>';
+    }
+
+    /**
+     * @param $i
+     * @return mixed
+     */
+    public static function getSidebarImage($i)
+    {
+        $value = static::getValueByKey("sidebar.images.{$i}");
+
+        $url = mb_substr($value, mb_strpos($value, "|") + 1);
+
+        $url = str_contains($url, 'http://') ? $url : "http://" . $url;
+
+        return $value == "" ? '' : '<a target="_blank" href="' . $url . '"><img src="'.
+            mb_substr($value, 0, mb_strpos($value, "|")) . '" /></a>';
+    }
+
+    /**
+     * @param $i
+     * @return mixed
+     */
+    public static function getQRImage($i)
+    {
+        return '<img src="' . static::getValueByKey("qrcodes.{$i}") . '" />';
     }
 }
