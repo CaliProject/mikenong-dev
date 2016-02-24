@@ -1,7 +1,7 @@
 <div class="banner">
     <ul class="banner-list">
-        @for($i = 1; $i<=4; $i++)
-        <li{{$i == 1 ? 'class=active' : ''}}>{!! \App\SiteConfiguration::getBannerImage($i) !!}</li>
+        @for($i = 1; $i <= 4; $i++)
+            <li{{$i == 1 ? 'class=active' : ''}}>{!! \App\SiteConfiguration::getBannerImage($i) !!}</li>
         @endfor
     </ul>
     <div class="banner-dots">
