@@ -113,6 +113,8 @@ class SiteConfiguration extends Model
             static::where('key', "sidebar.images.{$i}")->update(['value' => $request->input("sidebar{$i}")]);
         for ($i = 1; $i <= 20; $i++)
             static::where('key', "footer.link.{$i}")->update(['value' => $request->input("footer-link{$i}")]);
+        for ($i = 1; $i <= 4; $i++)
+            static::where('key', "banner.image.{$i}")->update(['value' => $request->input("banner{$i}")]);
     }
 
     /**
@@ -138,6 +140,22 @@ class SiteConfiguration extends Model
     public static function getSidebarImage($i)
     {
         $value = static::getValueByKey("sidebar.images.{$i}");
+
+        $url = mb_substr($value, mb_strpos($value, "|") + 1);
+
+        $url = str_contains($url, 'http://') ? $url : "http://" . $url;
+
+        return $value == "" ? '' : '<a target="_blank" href="' . $url . '"><img src="'.
+            mb_substr($value, 0, mb_strpos($value, "|")) . '" /></a>';
+    }
+
+    /**
+     * @param $i
+     * @return string
+     */
+    public static function getBannerImage($i)
+    {
+        $value = static::getValueByKey("banner.image.{$i}");
 
         $url = mb_substr($value, mb_strpos($value, "|") + 1);
 

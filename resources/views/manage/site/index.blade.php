@@ -95,6 +95,14 @@
                         </div>
                     </div>
                 @endfor
+                @for($i = 1; $i <= 4; $i++)
+                    <div class="form-group">
+                        <label for="" class="col-lg-2">幻灯图{{$i}}</label>
+                        <div class="col-lg-8">
+                            <input type="text" class="form-control" name="banner{{$i}}" value="{{ \App\SiteConfiguration::getValueByKey('banner.image.' . $i) }}" placeholder="图片地址|图片跳转链接">
+                        </div>
+                    </div>
+                @endfor
                 <div class="form-group">
                     <div class="col-lg-2 col-lg-offset-2">
                         <button type="submit" class="btn btn-success">更新</button>
@@ -114,6 +122,7 @@
         </div>
     </div>
 @stop
+
 
 @section('scripts')
     <script>

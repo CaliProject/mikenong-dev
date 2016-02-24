@@ -1,9 +1,8 @@
 <div class="banner">
     <ul class="banner-list">
-        <li class="active"><img src="images/banner1.jpg" alt=""></li>
-        <li><img src="images/banner2.jpg" alt=""></li>
-        <li><img src="images/banner3.jpg" alt=""></li>
-        <li><img src="images/banner4.jpg" alt=""></li>
+        @for($i = 1; $i<=4; $i++)
+        <li{{$i == 1 ? 'class=active' : ''}}>{!! \App\SiteConfiguration::getBannerImage($i) !!}</li>
+        @endfor
     </ul>
     <div class="banner-dots">
         <div class="banner-nav">
