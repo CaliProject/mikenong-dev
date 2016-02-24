@@ -54,3 +54,14 @@ $factory->define(App\Product::class, function (Faker\Generator $faker) {
         'is_sticky' => $faker->randomKey([0, 1]),
     ];
 });
+
+$factory->define(App\Pricing::class, function (Faker\Generator $faker) {
+   return [
+       'market' => $faker->name,
+       'min_price' => $faker->randomFloat(null, 0, 15),
+       'max_price' => $faker->randomFloat(null, 0, 15),
+       'avg_price' => $faker->randomFloat(null, 0, 15),
+       'category' => $faker->name,
+        'measurement' => $faker->name
+   ];
+});

@@ -44,6 +44,7 @@
             <div class="col-md-4">
                 @include('products.partials.sidebar_latest')
                 @include('products.partials.sidebar_hottest')
+                @include('products.partials.sidebar_images')
             </div>
         </div>
     </div>

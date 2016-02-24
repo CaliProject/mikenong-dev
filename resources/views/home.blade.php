@@ -50,7 +50,8 @@
                         @if(Auth::check())
                             <p>欢迎您, {{ Auth::user()->name }}</p>
                         @endif
-                        <p style="margin: 0;"><a href="{{ url('/products/create') }}" class="btn btn-success"><i class="fa fa-edit"></i> 免费发布信息</a></p>
+                        <p style="margin: 0;"><a href="{{ url('/products/create') }}" class="btn btn-block btn-success"><i class="fa fa-edit"></i> 免费发布信息</a><a
+                                    href="{{ url('pricing') }}" class="btn btn-block btn-primary"><i class="fa fa-list"></i> 农产品报价</a></p>
                     </div>
                 </div>
                 @include('products.partials.sidebar_latest')

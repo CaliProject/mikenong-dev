@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Http\Requests;
+use App\Pricing;
 use App\Product;
 use App\User;
 //use Illuminate\Foundation\Auth\User;
@@ -81,5 +82,95 @@ class HomeController extends Controller
         $cooperatives = User::cooperatives()->hot()->paginate();
 
         return view('users.cooperatives', compact("cooperatives"));
+    }
+
+    /**
+     * Show pricing
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function showPricing()
+    {
+        $pricings = Pricing::paginate();
+
+        return view('pricing.index', compact('pricings'));
+    }
+
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function showCreatePricing()
+    {
+        return view('manage.pricing.add');
+    }
+
+    /**
+     * @param Request $request
+     * @return $this|\Illuminate\Http\RedirectResponse
+     */
+    public function createPricing(Request $request)
+    {
+        $this->validate($request, [
+            "max_price" => "required|numeric",
+            "min_price" => "required|numeric",
+            "avg_price" => "required|numeric",
+            "market" => "required",
+            "category" => "required"
+        ], [], [
+            "max_price" => "最高价格",
+            "min_price" => "最低价格",
+            "avg_price" => "平均价格",
+            "market" => "农产品名称",
+            "category" => "种类"
+        ]);
+        return Pricing::create($request->all()) ? redirect('pricing')->with(['status' => 'success', 'message' => "更新成功"]) : redirect()->back()->withInput($request->all());
+    }
+
+    /**
+     * Show page for editing a pricing
+     *
+     * @param Pricing $pricing
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function showEditPricing(Pricing $pricing)
+    {
+        return view('manage.pricing.edit', compact('pricing'));
+    }
+
+    /**
+     * Update a pricing
+     *
+     * @param Request $request
+     * @param Pricing $pricing
+     * @return $this|\Illuminate\Http\RedirectResponse
+     */
+    public function updatePricing(Request $request, Pricing $pricing)
+    {
+        $this->validate($request, [
+            "max_price" => "required|numeric",
+            "min_price" => "required|numeric",
+            "avg_price" => "required|numeric",
+            "market" => "required",
+            "category" => "required"
+        ], [], [
+            "max_price" => "最高价格",
+            "min_price" => "最低价格",
+            "avg_price" => "平均价格",
+            "market" => "农产品名称",
+            "category" => "种类"
+        ]);
+        return $pricing->update($request->all()) ? redirect('pricing')->with(['status' => 'success', 'message' => "更新成功"]) : redirect()->back()->withInput($request->all());
+    }
+
+    /**
+     * Deletes a pricing
+     *
+     * @param Pricing $pricing
+     * @return array
+     * @throws \Exception
+     */
+    public function deletePricing(Pricing $pricing)
+    {
+        return $pricing->delete() ? ["status" => "success", "message" => "删除成功"] : ["status" => "error", "message" => "删除失败"];
     }
 }

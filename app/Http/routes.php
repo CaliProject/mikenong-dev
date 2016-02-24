@@ -47,7 +47,15 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('categories', 'HomeController@showAllCategories');
     Route::get('category/{category}/{status}', 'HomeController@showCategoryWithStatus');
 
+    /*
+     * Cooperatives routes
+     */
     Route::get('cooperatives', 'HomeController@showCooperatives');
+
+    /*
+     * Pricing routes
+     */
+    Route::get('pricing', 'HomeController@showPricing');
 });
 
 // Routes that needed authenticated logged in users only
@@ -145,4 +153,10 @@ Route::group(['middleware' => ['web', 'auth', 'role:administrator']], function (
     Route::get('manage/pages/{page}', 'ManageController@editPage');
     Route::post('manage/pages/{page}', 'ManageController@savePage');
     Route::delete('manage/pages/{page}', 'ManageController@deletePage');
+
+    Route::get('pricing/add', 'HomeController@showCreatePricing');
+    Route::post('pricing/add', 'HomeController@createPricing');
+    Route::get('pricing/edit/{pricing}', 'HomeController@showEditPricing');
+    Route::post('pricing/edit/{pricing}', 'HomeController@updatePricing');
+    Route::delete('pricing/{pricing}', 'HomeController@deletePricing');
 });

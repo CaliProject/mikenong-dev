@@ -1,15 +1,18 @@
 <form action="{{ $action_url }}" method="{{ $method }}" class="form-horizontal col-lg-10 col-lg-offset-1" id="form">
     {!! csrf_field() !!}
-    @if(Auth::user()->isManager())
-        <div class="form-group">
-            <label for="" class="col-lg-2">
-                *用户名
-            </label>
-            <div class="col-lg-8">
-                <input type="text" class="form-control" name="name" value="{{ old('name') ? old('name') : $user->name }}" required>
-            </div>
+    <div class="form-group">
+        <label for="" class="col-lg-2">
+            *用户名
+        </label>
+        <div class="col-lg-8">
+            @if(Auth::user()->isManager())
+            <input type="text" class="form-control" name="name" value="{{ old('name') ? old('name') : $user->name }}" required>
+            @else
+            <input type="text" class="form-control" name="name" value="{{ $user->name }}" required disabled>
+            <input type="text" name="name" value="{{ $user->name }}" hidden>
+            @endif
         </div>
-    @endif
+    </div>
     <div class="form-group">
         <label for="" class="col-lg-2">
             *电子邮箱
