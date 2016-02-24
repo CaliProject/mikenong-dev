@@ -173,4 +173,5 @@ class SiteConfiguration extends Model
     {
         return '<img src="' . static::getValueByKey("qrcodes.{$i}") . '" />';
     }
+
 }
