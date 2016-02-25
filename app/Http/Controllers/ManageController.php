@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\DB;
 
 class ManageController extends Controller
 {
@@ -479,5 +480,30 @@ class ManageController extends Controller
     public function deletePage(Page $page)
     {
         return $page->delete() ? ['status' => 'success', 'message' => '成功删除'] : ['status' => "error", 'message' => '删除失败'];
+    }
+
+    /**
+     * Edit about page
+     * 
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function editAboutPage()
+    {
+        $about = DB::table('about')->first();
+        return view('pages.edit', compact('about'));
+    }
+
+    /**
+     * Update about page
+     *
+     * @param Request $request
+     *
+     * @return mixed
+     */
+    public function updateAboutPage(Request $request)
+    {
+        DB::table('about')->where('id', 1)->update(['body' => $request->input('editorValue')]);
+
+        return redirect()->back()->with(['status' => 'success', 'message' => '更新成功']);
     }
 }

@@ -25,6 +25,16 @@ class SiteConfiguration extends Model
     }
 
     /**
+     * Get site logo
+     * 
+     * @return mixed
+     */
+    public static function getSiteLogo()
+    {
+        return static::getValueByKey("logo");
+    }
+    
+    /**
      * Get description for SEO
      *
      * @return mixed
@@ -102,6 +112,7 @@ class SiteConfiguration extends Model
     public static function saveValues(Request $request)
     {
         static::where('key', 'site.name')->update(['value' => $request->input('name')]);
+        static::where('key', 'logo')->update(['value' => $request->input('logo')]);
         static::where('key', 'site.description')->update(['value' => $request->input('description')]);
         static::where('key', 'site.keywords')->update(['value' => $request->input('keywords')]);
         static::where('key', 'beian')->update(['value' => $request->input('beian')]);
@@ -115,6 +126,10 @@ class SiteConfiguration extends Model
             static::where('key', "footer.link.{$i}")->update(['value' => $request->input("footer-link{$i}")]);
         for ($i = 1; $i <= 4; $i++)
             static::where('key', "banner.image.{$i}")->update(['value' => $request->input("banner{$i}")]);
+        static::where('key', 'sidebar.text')->update(['value' => $request->input('sidebar-text')]);
+        static::where('key', 'sidebar.image')->update(['value' => $request->input('sidebar-image')]);
+        static::where('key', 'news.image')->update(['value' => $request->input('news-image')]);
+        static::where('key', 'main.image')->update(['value' => $request->input('main-image')]);
     }
 
     /**
@@ -174,4 +189,58 @@ class SiteConfiguration extends Model
         return '<img src="' . static::getValueByKey("qrcodes.{$i}") . '" />';
     }
 
+    /**
+     * Get custom sidebar image
+     *
+     * @return string
+     */
+    public static function getSidebarCustomImage()
+    {
+        $value = static::getValueByKey("sidebar.image");
+
+        $text = mb_substr($value, mb_strpos($value, "|") + 1);
+
+        $url = mb_substr($value, 0, mb_strpos($value, "|"));
+
+        return $value === "" ? '' : '<img src="' . $url . '" /><span>' . $text . '</span>';
+    }
+
+    /**
+     * Get news bottom section image
+     * 
+     * @return string
+     */
+    public static function getNewsBottomSection()
+    {
+        return self::extractImage("news.image");
+    }
+    
+    /**
+     * Get main bottom section image
+     * 
+     * @return string
+     */
+    public static function getMainBottomSection()
+    {
+        return self::extractImage("main.image");
+    }
+
+    /**
+     * Extract image from key
+     * 
+     * @param $key
+     *
+     * @return string
+     */
+    private static function extractImage($key)
+    {
+        $value = static::getValueByKey($key);
+
+        $url = mb_substr($value, mb_strpos($value, "|") + 1);
+
+        $url = str_contains($url, 'http://') ? $url : "http://" . $url;
+
+        return $value == "" ? '' : '<a target="_blank" href="' . $url . '"><img src="' .
+            mb_substr($value, 0, mb_strpos($value, "|")) . '" /></a>';
+    }
 }

@@ -116,6 +116,18 @@ class ProductsController extends Controller
     }
 
     /**
+     * Show pages
+     * 
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function showPages()
+    {
+        $pages = Page::latest()->paginate();
+        
+        return view('pages.index', compact('pages'));
+    }
+    
+    /**
      * Page details
      *
      * @param Page $page

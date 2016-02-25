@@ -5,17 +5,20 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-9">
                 {{-- Banner Start --}}
                 @include('layouts.partials.banner')
                 {{-- Banner End --}}
                 <div class="panel panel-success">
                     <div class="panel-heading">
                         产业新闻
+                        <div class="navbar-right" style="margin-right: 5px">
+                            <a href="{{ url('news') }}">更多...</a>
+                        </div>
                     </div>
                     <div class="panel-body">
                         <ul class="home-list">
-                            @forelse(\App\Page::all() as $page)
+                            @forelse($pages as $page)
                                 <li class="page">
                                     <p>
                                         <a href="{{ $page->link() }}">{{ $page->title }}</a>
@@ -27,6 +30,9 @@
                             @endforelse
                         </ul>
                     </div>
+                </div>
+                <div class="bottom-section">
+                    {!! \App\SiteConfiguration::getNewsBottomSection() !!}
                 </div>
                 <div class="panel panel-success">
                     <div class="panel-heading">
@@ -43,8 +49,11 @@
                     </nav>
                     {{-- Pagination End --}}
                 </div>
+                <div class="bottom-section">
+                    {!! \App\SiteConfiguration::getMainBottomSection() !!}
+                </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <div class="create-panel panel panel-success">
                     <div class="panel-body text-center">
                         @if(Auth::check())
@@ -54,6 +63,8 @@
                                     href="{{ url('pricing') }}" class="btn btn-block btn-primary"><i class="fa fa-list"></i> 农产品报价</a></p>
                     </div>
                 </div>
+                @include('layouts.partials.sidebar_news')
+                @include('layouts.partials.sidebar_image')
                 @include('products.partials.sidebar_latest')
                 @include('products.partials.sidebar_hottest')
                 @include('products.partials.sidebar_images')

@@ -36,6 +36,8 @@
     <script src="{{ elixir('js/app.js') }}"></script>
     <script>
         $(function () {
+            $('#back-to-top').hide();
+
             $('#search-bar').bind('keypress',function(event){
                 if(event.keyCode == "13" && $.trim($('#search-bar').val()) != "")
                 {
@@ -46,6 +48,24 @@
             $('#search-btn').on('click', function () {
                 if ($.trim($('#search-bar').val()) != "") {
                     window.location.href = "{{ url('/search')}}/" + $('#search-bar').val();
+                }
+            });
+
+            $('#back-to-top').on('click', function () {
+                $('body').animate({
+                    scrollTop: 0
+                }, 500);
+            });
+
+            $('#features').on('click', function () {
+                window.open('{{ url('about') }}', "_blank");
+            });
+
+            $(window).scroll(function () {
+                if ($(this).scrollTop() >= 350) {
+                    $('#back-to-top').fadeIn();
+                } else {
+                    $('#back-to-top').fadeOut();
                 }
             });
         });

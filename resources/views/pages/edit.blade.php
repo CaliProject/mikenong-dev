@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', '编辑产品')
+@section('title', '编辑关于页面')
 
 @push('styles')
 <link rel="stylesheet" href="{{ url('css/dropzone.css') }}">
@@ -9,13 +9,6 @@
 @push('scripts.header')
 <script>
     var UPLOAD_IMAGE_URL = "{{ url('/products/upload') }}";
-    window.onbeforeunload = function()
-    {
-        var unloads = document.getElementsByTagName("body")[0].value;
-        if(unloads == null || unloads == ""){
-            return "您确定要退出页面吗？所有改变将不会保存";
-        }
-    }
 </script>
 <script type="text/javascript" charset="utf-8" src="{{ url('ueditor') }}/ueditor.config.js"></script>
 <script type="text/javascript" charset="utf-8" src="{{ url('ueditor') }}/ueditor.all.min.js"> </script>
@@ -29,14 +22,39 @@
                 @include('manage.flash-message')
                 <div class="panel panel-success">
                     <div class="panel-heading">
-                        编辑产品
+                        编辑关于页面
                     </div>
                     <div class="panel-body">
                         {{-- Product Edit Form Start --}}
-                        @include('manage.product.partials.form', [
-                         'method' => 'POST',
-                         'action_url' => action('ProductsController@updateProduct', ["id" => $product->id]),
-                         'action_button' => '更新'])
+                        <form action="{{ url()->current() }}" method="post" class="form-horizontal col-lg-12" id="form">
+                            {!! csrf_field() !!}
+                            {!! method_field("patch") !!}
+                            <div class="form-group">
+                                <label for="" class="col-lg-2">
+                                    页面内容
+                                </label>
+                                <div class="col-lg-10">
+                                    <script id="editor" type="text/plain" style="width:100%;height:500px;"></script>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-10 col-lg-offset-2">
+                                        <div id="dropzone-holder">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-lg-10 col-lg-offset-2">
+                                    <button type="submit" class="btn btn-success col-sm-12">更新</button>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="col-lg-10 col-lg-offset-2">
+                            <form id="dropzone-form" action="{{ url('products/upload') }}" method="POST" class="dropzone" style="margin-top: 100px;">
+                                {!! csrf_field() !!}
+                            </form>
+                        </div>
                         {{-- Product Edit Form End --}}
                     </div>
                 </div>
@@ -56,7 +74,7 @@
             var ue = UE.getEditor('editor');
 
             setTimeout(function () {
-                ue.execCommand('insertHtml', '{!! addslashes($product->description) !!}');
+                ue.execCommand('insertHtml', '{!! addslashes($about->body) !!}');
             }, 500);
 
             Dropzone.options.dropzoneForm = {

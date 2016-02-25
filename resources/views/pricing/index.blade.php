@@ -38,9 +38,9 @@
                                     <td>{{ $pricing->updated_at->format('Y-m-d') }}</td>
                                     <td>{{ $pricing->category }}</td>
                                     <td>{{ $pricing->market }}</td>
-                                    <td style="text-align: left;">{{ $pricing->min_price }}</td>
-                                    <td style="text-align: left;">{{ $pricing->max_price }}</td>
-                                    <td style="text-align: left;">{{ $pricing->avg_price }}</td>
+                                    <td style="text-align: left;">{{ $pricing->formatPrice('min_price') }}</td>
+                                    <td style="text-align: left;">{{ $pricing->formatPrice('max_price') }}</td>
+                                    <td style="text-align: left;">{{ $pricing->formatPrice('avg_price') }}</td>
                                     <td>{{ $pricing->measurement }}</td>
                                     @if(Auth::check())
                                         @if(auth()->user()->isManager())

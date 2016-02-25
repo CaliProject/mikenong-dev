@@ -23,6 +23,14 @@
                 </div>
                 <div class="form-group">
                     <label for="" class="col-lg-2">
+                        站点LOGO
+                    </label>
+                    <div class="col-lg-8">
+                        <input type="text" class="form-control" name="logo" value="{{ \App\SiteConfiguration::getSiteLogo() }}" placeholder="站点的LOGO图片链接, 不填则用站点名称文字代替">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-lg-2">
                         站点介绍
                     </label>
                     <div class="col-lg-8">
@@ -97,12 +105,36 @@
                 @endfor
                 @for($i = 1; $i <= 4; $i++)
                     <div class="form-group">
-                        <label for="" class="col-lg-2">幻灯图{{$i}}</label>
+                        <label for="banner{{$i}}" class="col-lg-2">幻灯图{{$i}}</label>
                         <div class="col-lg-8">
                             <input type="text" class="form-control" name="banner{{$i}}" value="{{ \App\SiteConfiguration::getValueByKey('banner.image.' . $i) }}" placeholder="图片地址|图片跳转链接">
                         </div>
                     </div>
                 @endfor
+                <div class="form-group">
+                    <label for="sidebar-text" class="col-lg-2">公告文字</label>
+                    <div class="col-lg-8">
+                        <input type="text" class="form-control" name="sidebar-text" value="{{ \App\SiteConfiguration::getValueByKey('sidebar.text') }}" placeholder="公告文字内容">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="sidebar-image" class="col-lg-2">边栏图片文字</label>
+                    <div class="col-lg-8">
+                        <input type="text" class="form-control" name="sidebar-image" value="{{ \App\SiteConfiguration::getValueByKey('sidebar.image') }}" placeholder="图片地址|文字内容">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="news-image" class="col-lg-2">新闻底部图</label>
+                    <div class="col-lg-8">
+                        <input type="text" class="form-control" name="news-image" value="{{ \App\SiteConfiguration::getValueByKey('news.image') }}" placeholder="图片地址|链接地址">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="main-image" class="col-lg-2">农产品底图</label>
+                    <div class="col-lg-8">
+                        <input type="text" class="form-control" name="main-image" value="{{ \App\SiteConfiguration::getValueByKey('main.image') }}" placeholder="图片地址|链接地址">
+                    </div>
+                </div>
                 <div class="form-group">
                     <div class="col-lg-2 col-lg-offset-2">
                         <button type="submit" class="btn btn-success">更新</button>

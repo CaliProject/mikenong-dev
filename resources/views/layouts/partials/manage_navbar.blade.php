@@ -11,8 +11,12 @@
             </button>
 
             <!-- Branding Image -->
-            <a class="navbar-brand" href="{{ url('/') }}" style="font-size: 28px; font-weight: bold; color: #DA6969 !important">
-                {{ \App\SiteConfiguration::getSiteName() }}
+            <a class="navbar-brand{{ \App\SiteConfiguration::getSiteLogo() !== "" ? " nav-with-logo" : "" }}" href="{{ url('/') }}" style="font-size: 28px; font-weight: bold; color: #DA6969 !important">
+                @if(\App\SiteConfiguration::getSiteLogo() !== "")
+                    <img src="{{ \App\SiteConfiguration::getSiteLogo() }}" alt="{{ \App\SiteConfiguration::getSiteName() }}" class="site-logo">
+                @else
+                    {{ \App\SiteConfiguration::getSiteName() }}
+                @endif
             </a>
         </div>
 

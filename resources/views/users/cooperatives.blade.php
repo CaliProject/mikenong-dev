@@ -5,7 +5,7 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-lg-8">
+            <div class="col-lg-9">
                 <div class="panel panel-success">
                     <div class="panel-heading">合作社</div>
                     <div class="panel-body">
@@ -24,7 +24,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4">
+            <div class="col-lg-3">
                 @include('products.partials.sidebar_latest')
                 @include('products.partials.sidebar_hottest')
                 @include('products.partials.sidebar_images')

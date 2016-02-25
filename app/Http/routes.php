@@ -37,6 +37,8 @@ Route::group(['middleware' => 'web'], function () {
     // Product detail
     Route::get('product/{product}', 'ProductsController@productDetails');
 
+    // Pages related
+    Route::get('news', 'ProductsController@showPages');
     Route::get('pages/{page}', 'ProductsController@pageDetails');
 
     // Other user's products
@@ -56,6 +58,9 @@ Route::group(['middleware' => 'web'], function () {
      * Pricing routes
      */
     Route::get('pricing', 'HomeController@showPricing');
+    
+    // About page
+    Route::get('about', 'HomeController@showAboutPage');
 });
 
 // Routes that needed authenticated logged in users only
@@ -159,4 +164,8 @@ Route::group(['middleware' => ['web', 'auth', 'role:administrator']], function (
     Route::get('pricing/edit/{pricing}', 'HomeController@showEditPricing');
     Route::post('pricing/edit/{pricing}', 'HomeController@updatePricing');
     Route::delete('pricing/{pricing}', 'HomeController@deletePricing');
+
+    // About page
+    Route::get('about/edit', 'ManageController@editAboutPage');
+    Route::patch('about/edit', 'ManageController@updateAboutPage');
 });

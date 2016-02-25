@@ -27,10 +27,25 @@
     </div>
 </footer>
 <div class="utilities">
-    <div class="qrcode-icon">
-        <i class="fa fa-qrcode"></i>
+    <div class="utility-item">
+        <div class="qrcode-icon icon">
+            <i class="fa fa-qrcode"></i>
+            <span>扫二维码</span>
+        </div>
+        <div class="qrcode">
+            {!! \App\SiteConfiguration::getQRImage(1) !!}
+        </div>
     </div>
-    <div class="qrcode">
-        {!! \App\SiteConfiguration::getQRImage(1) !!}
+    <div class="utility-item">
+        <div id="features" class="features icon">
+            <i class="fa fa-support"></i>
+            <span>米东特色</span>
+        </div>
+    </div>
+    <div class="utility-item">
+        <div id="back-to-top" class="back-to-top icon">
+            <i class="fa fa-angle-up"></i>
+            <span>返回顶部</span>
+        </div>
     </div>
 </div>

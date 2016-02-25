@@ -5,7 +5,7 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-9">
                 @include('manage.flash-message')
                 <div class="panel panel-success">
                     <div class="panel-heading">
@@ -20,7 +20,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
                 @include('products.partials.sidebar_latest')
                 @include('products.partials.sidebar_hottest')
             </div>

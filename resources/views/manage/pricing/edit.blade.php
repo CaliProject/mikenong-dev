@@ -5,7 +5,7 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-lg-8">
+            <div class="col-lg-9">
                 @include('manage.flash-message')
                 <div class="row text-center">
                     <h3>更新报价</h3>
@@ -15,7 +15,7 @@
                     "button" => "更新"
                 ])
             </div>
-            <div class="col-lg-4">
+            <div class="col-lg-3">
                 @include('products.partials.sidebar_hottest')
                 @include('products.partials.sidebar_latest')
                 @include('products.partials.sidebar_images')

@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Http\Requests;
+use App\Page;
 use App\Pricing;
 use App\Product;
 use App\User;
 //use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -20,8 +22,9 @@ class HomeController extends Controller
     public function index()
     {
         $products = Product::stickyFirst()->latest()->paginate(35);
+        $pages = Page::latest()->take(5)->get();
 
-        return view('home', compact('products'));
+        return view('home', compact('products', 'pages'));
     }
 
     /**
@@ -91,7 +94,7 @@ class HomeController extends Controller
      */
     public function showPricing()
     {
-        $pricings = Pricing::paginate();
+        $pricings = Pricing::paginate(50);
 
         return view('pricing.index', compact('pricings'));
     }
@@ -172,5 +175,17 @@ class HomeController extends Controller
     public function deletePricing(Pricing $pricing)
     {
         return $pricing->delete() ? ["status" => "success", "message" => "删除成功"] : ["status" => "error", "message" => "删除失败"];
+    }
+
+    /**
+     * Show about page
+     * 
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function showAboutPage()
+    {
+        $about = DB::table('about')->first();
+        
+        return view('about', compact('about'));
     }
 }

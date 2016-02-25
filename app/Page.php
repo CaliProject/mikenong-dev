@@ -10,6 +10,8 @@ class Page extends Model
     protected $fillable = [
         "title", "content"
     ];
+    
+    protected $perPage = 35;
 
     /**
      * Link
@@ -19,5 +21,17 @@ class Page extends Model
     public function link()
     {
         return url('pages/' . $this->id);
+    }
+
+    /**
+     * Scope its query to latest order
+     * 
+     * @param $query
+     *
+     * @return mixed
+     */
+    public static function scopeLatest($query)
+    {
+        return $query->orderBy('created_at', 'desc');
     }
 }
