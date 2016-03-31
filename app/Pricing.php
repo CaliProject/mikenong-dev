@@ -10,13 +10,13 @@ class Pricing extends Model
         "category", "min_price", "max_price", "avg_price", "market", "measurement"
     ];
 
-    protected $perPage = 5;
+    protected $perPage = 50;
 
     protected $table = "pricing";
 
     /**
      * Scope a query to its latest order
-     * 
+     *
      * @param $query
      *
      * @return mixed
