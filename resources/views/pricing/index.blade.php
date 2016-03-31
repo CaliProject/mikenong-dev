@@ -57,6 +57,7 @@
                         <nav class="home-pagination">
                             {!! $pricings->links() !!}
                         </nav>
+                        {!! dd($pricings) !!}
                     </div>
                 </div>
             </div>
