@@ -94,7 +94,7 @@ class HomeController extends Controller
      */
     public function showPricing()
     {
-        $pricings = Pricing::paginate(5);
+        $pricings = Pricing::paginate();
 
         return view('pricing.index', compact('pricings'));
     }
