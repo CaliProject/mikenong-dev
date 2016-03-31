@@ -10,7 +10,7 @@ class Pricing extends Model
         "category", "min_price", "max_price", "avg_price", "market", "measurement"
     ];
 
-    protected $perPage = 45;
+    protected $perPage = 5;
 
     protected $table = "pricing";
 
