@@ -21,7 +21,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $products = Product::stickyFirst()->latest()->paginate(35);
+        $products = Product::stickyFirst()->latest()->paginate(3);
         $pages = Page::latest()->take(5)->get();
 
         return view('home', compact('products', 'pages'));
