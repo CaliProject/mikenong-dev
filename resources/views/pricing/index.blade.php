@@ -55,9 +55,9 @@
                             @endforelse
                         </table>
                         <nav class="home-pagination">
-                            {!! $pricings->links() !!}
+                            {!! $pricings->render() !!}
+                            {{--{!! $pricings->links() !!}--}}
                         </nav>
-                        {!! dd($pricings) !!}
                     </div>
                 </div>
             </div>
