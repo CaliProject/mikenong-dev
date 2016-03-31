@@ -14,35 +14,17 @@ class Pricing extends Model
 
     protected $table = "pricing";
 
-//    /**
-//     * Attribute accessor
-//     *
-//     * @return string
-//     */
-//    public function getMinPriceAttribute()
-//    {
-//        return $this->formatPrice($this->attributes['min_price']);
-//    }
-//
-//    /**
-//     * Attribute accessor
-//     *
-//     * @return string
-//     */
-//    public function getMaxPriceAttribute()
-//    {
-//        return $this->formatPrice($this->attributes['max_price']);
-//    }
-//
-//    /**
-//     * Attribute accessor
-//     *
-//     * @return string
-//     */
-//    public function getAvgPriceAttribute()
-//    {
-//        return $this->formatPrice($this->attributes['avg_price']);
-//    }
+    /**
+     * Scope a query to its latest order
+     * 
+     * @param $query
+     *
+     * @return mixed
+     */
+    public static function scopeLatest($query)
+    {
+        return $query->orderBy('updated_at', 'desc');
+    }
 
     /**
      * Format price to a specific pattern
