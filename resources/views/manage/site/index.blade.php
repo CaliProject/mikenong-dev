@@ -61,14 +61,6 @@
                         <input type="number" class="form-control" name="qq" value="{{ \App\SiteConfiguration::getSiteServiceQQ() }}">
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="" class="col-lg-2">
-                        友情链接
-                    </label>
-                    <div class="col-lg-8">
-                        <input type="text" class="form-control" name="qq" value="{{ \App\SiteConfiguration::getSiteServiceQQ() }}">
-                    </div>
-                </div>
                 @for($i = 1; $i <= 3; $i++)
                     <div class="form-group">
                         <label for="" class="col-lg-2">

@@ -10,6 +10,10 @@
     <meta name="description" content="{{ \App\SiteConfiguration::getSiteDescription() }}">
     <meta name="keywords" content="{{ \App\SiteConfiguration::getSiteKeywords() }}">
 
+    @unless(\App\SiteConfiguration::getSiteLogo() === "")
+        <link rel="icon" href="{{ \App\SiteConfiguration::getSiteLogo() }}">
+        <link rel="shortcut icon" href="{{ \App\SiteConfiguration::getSiteLogo() }}">
+    @endunless
     <!-- Fonts -->
     <link href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
 
